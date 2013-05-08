@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>注册 | 云袖便签</title>
+</head>
+<body>
+<div>
+    <% if (locals.error) { %>
+    <div class="alert alert-error">
+        <a class="close" data-dismiss="alert" href="#">&times;</a>
+        <strong><%= error %></strong>
+    </div>
+    <% } %>
+    <% if (locals.success) { %>
+    <div class="alert alert-success">
+        <strong><%= success %></strong>
+    </div>
+    <% } else { %>
+    <form action="/signup" method="post">
+        用户名：<input type="text" id="username" name="username">
+        邮箱：<input type="text" id="useremail" name="useremail">
+        密码：<input type="password" id="password" name="password">
+        重复密码：<input type="password" id="re_pwd" name="re_pwd">
+        <input type="submit" value="注册">
+    </form>
+    <% } %>
+</div>
+</body>
+</html>
