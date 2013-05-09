@@ -14,12 +14,81 @@ var check = require('validator').check,
 var config = require('../config');
 var security = require('../utils/security_utils');
 
+/**
+ * define some page when login just jump to the home page
+ * @type {Array}
+ */
+var notJump = [
+  '/active_account', //active page
+  '/reset_pass',     //reset password page, avoid to reset twice
+  '/signup',         //regist page
+  '/search_pass'    //serch pass page
+];
+
+//login
+exports.login = function(req, res) {
+	req.session._loginReferer = req.headers.referer; //来自nodeclub不知道什么意思?
+  res.render('index');
+}
+
+/**
+ * Handle user login.
+ *
+ * @param {HttpRequest} req
+ * @param {HttpResponse} res
+ * @param {Function} next
+ */
+exports.doLogin = function(req, res, next) {
+  var loginname = sanitize(req.body.username).trim().toLowerCase();
+  var pass = sanitize(req.body.password).trim();
+
+  if (!loginname || !pass) {
+    return res.render('sign/signin', { error: '信息不完整。' });
+  }
+
+  User.findOne(loginname, function (err, user) {
+    if (err) {
+      return next(err);
+    }
+    if (!user) {
+      return res.render('sign/signin', { error: '这个用户不存在。' });
+    }
+    pass = security.md5(pass);
+    if (pass !== user.pass) {
+      return res.render('sign/signin', { error: '密码错误。' });
+    }
+    if (!user.active) {
+      // 从新发送激活邮件
+      mail.sendActiveMail(user.email, md5(user.email + config.session_secret), user.name, user.email);
+      return res.render('sign/signin', { error: '此帐号还没有被激活，激活链接已发送到 ' + user.email + ' 邮箱，请查收。' });
+    }
+    // store session cookie
+    gen_session(user, res);
+    //check at some page just jump to home page
+    var refer = req.session._loginReferer || 'home';  //跳转到用户请求之前想要到达的页面,否则跳转到主页
+    for (var i = 0, len = notJump.length; i !== len; ++i) {  //这地方就不明白是在做什么了?
+      if (refer.indexOf(notJump[i]) >= 0) {
+        refer = 'home';
+        break;
+      }
+    }
+    res.redirect(refer);
+  });
+}
+
 //sign up
-exports.signup = function (req, res) {
+exports.signup = function(req, res) {
   res.render('sign/signup');
 };
 
-exports.doSignup = function (req, res, next) {
+/**
+ * Handle user signup.
+ *
+ * @param {HttpRequest} req
+ * @param {HttpResponse} res
+ * @param {Function} next
+ */
+exports.doSignup = function(req, res, next) {
   var name = sanitize(req.body.username).trim();
   name = sanitize(name).xss();
   var loginname = name.toLowerCase();

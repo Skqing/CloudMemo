@@ -20,7 +20,7 @@ module.exports = {
   site_headers: [
     '<meta name="author" content="CloudNote" />'
   ],
-  host : 'birdway.org',
+  host : 'memo.cc',
   port : 80,
   site_logo: '', // default is `name`
   //site_navs: [
@@ -30,21 +30,20 @@ module.exports = {
 
   site_static_host: '', // 静态文件存储域名
   site_enable_search_preview: false, // 开启google search preview
-  site_google_search_domain:  'birdway.org',  // google search preview中要搜索的域名
+  site_google_search_domain:  'memo.cc',  // google search preview中要搜索的域名
 
   //upload_dir: path.join(__dirname, 'public', 'user_data', 'images'),
 
   //security settings
-  cookie_id : 'birdway_sid',  //cookie标识
+  cookie_id : 'memo_sid',  //cookie标识
   user_session_key : 'user_session_key',  //用户session标识
   loginrefer_session_key: 'loginrefer_session_key',
 
-  cookie_secret : 'cloudnote',
-  session_secret: 'cloudnote',
-  auth_cookie_name: 'cloudnote',
+  cookie_secret : 'cloudmemo',
+  session_secret: 'cloudmemo',
+  auth_cookie_name: 'cloudmemo',
   redirect_uri : 'index',  //跳转地址,用户登录后转到之前请求的地址
 
-  clienttype: ['pc', 'mobile', 'pad'],  //用户登录的客户端类型
 
   //db settings
   //url=mongodb://user:pass@127.0.0.1:27017/birdway/collection
