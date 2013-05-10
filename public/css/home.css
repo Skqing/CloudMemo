@@ -6,5 +6,85 @@
  * Time: 下午8:08
  * Description: for home page
  */
- 
- 
+/** base style */
+html{
+    overflow:-moz-scrollbars-vertical;
+}
+
+textarea{
+    -moz-resize: vertical;
+    -webkit-resize: vertical;
+    resize: vertical;
+    overflow:auto;
+}
+
+#memotext{
+    background:#ffffff;
+    border-bottom-color:#ff6633;
+    border-bottom-width:0px;
+    border-top-width:0px;
+    border-left-width:0px;
+    border-right-width:0px;
+    color: #000000;
+    FONT-SIZE: 9pt;
+    FONT-STYLE: normal;
+    FONT-VARIANT: normal;
+    FONT-WEIGHT: normal;
+    LINE-HEIGHT: normal;
+}
+
+.textfield {width:450px;height:20px;background-image:url(images/inputbg.gif);color:#666;border:1px dotted #999666;padding:3px 0px 0px 5px;} /*设置标题文本框边框，背景图片及文字颜色*/
+.textarea {width:450px;height:120px;background:url(images/logo.gif) no-repeat right top;border:1px dotted #999666; } /*设置留言文本框边框，背景图片*/
+
+
+#memo {
+    width: 150px;
+}
+
+#memo div.innerstyle {
+    background: #fff;
+    background: -moz-linear-gradient(100% 50%, #fff, #fff 10%, #f3f3f3);
+    background: -webkit-linear-gradient(100% 50%, #fff, #fff 10%, #f3f3f3);
+    border: 1px solid #ccc;
+    -webkit-box-shadow: 1px 1px 4px rgba(0,0,0, 0.1);
+    -moz-box-shadow: 1px 1px 4px rgba(0,0,0, 0.1);
+    box-shadow: 1px 1px 4px rgba(0,0,0, 0.1);
+    -webkit-border-bottom-right-radius: 60px 5px;
+    -moz-border-radius-bottomright: 60px 5px;
+    border-bottom-right-radius: 60px 5px;
+}
+#innerstyle:before{
+    content:"";
+    width:98%;
+    height:98%;
+    left:0;
+    top:0;
+    background-color:#fff;
+    border: 1px solid #ccc;
+    -webkit-transform:skew(4deg, 2deg) translate(6px, 7px);
+    -moz-transform:skewX(4deg) skewY(2deg) translate(6px, 7px);
+    -ms-transform:skew(4deg, 2deg) translate(6px, 7px);
+    -o-transform:skew(4deg, 2deg) translate(6px, 7px);
+    transform:skew(4deg, 2deg) translate(6px, 7px);
+    -webkit-border-bottom-right-radius: 60px 5px;
+    -moz-border-radius-bottomright: 60px 5px;
+    border-bottom-right-radius: 60px 5px;
+}
+#innerstyle:after{
+    content:"";
+    width:98%;
+    height:98%;
+    left:0;
+    top:0;
+    background-color:#fff;
+    border: 1px solid #ccc;
+    -webkit-transform:skew(3deg, 1deg) translate(4px, 4px);
+    -moz-transform:skewX(3deg) skewY(1deg) translate(4px, 4px);
+    -ms-transform:skew(3deg, 1deg) translate(4px, 4px);
+    -o-transform:skew(3deg, 1deg) translate(4px, 4px);
+    transform:skew(3deg, 1deg) translate(4px, 4px);
+}
+
+#tools li {
+    cursor: pointer;
+}

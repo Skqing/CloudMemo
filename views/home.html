@@ -11,11 +11,20 @@
 <body>
     <div id="desktop">
         <div id="top">
-            <div id="memo">
-                <textarea id="memotext" cols="20" rows="10"></textarea>
-            </div>
-            <div id="memolist"></div>
         </div>
+        <div id="memo">
+            <div class="innerstyle">
+                <div id="context">
+                    <textarea id="memotext" cols="20" rows="13" wrap="physical"></textarea>
+                </div>
+            </div>
+            <div id="tools">
+                <ul>
+                    <li><button id="clear">清空</button> </li><li><button id="filling">归档</button></li>
+                </ul>
+            </div>
+        </div>
+        <div id="memolist"></div>
     </div>
 </body>
 </html>
