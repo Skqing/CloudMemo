@@ -6,7 +6,12 @@
  * Description: site index controller
  */
 
-exports.index = function (req, res, next) {
+exports.index = function(req, res, next) {
 
-  res.render('index', {});
+  res.render('index');
+}
+
+exports.home = function(req, res, next) {
+
+  res.render('home');
 }

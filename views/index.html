@@ -6,12 +6,18 @@
 </head>
 <body>
 <div>
-    <form action="/" method="post">
-        <input type="text" id="useremail" name="useremail">
-        <input type="password" id="userpw" name="userpw">
+    <form action="/login" method="post">
+        <input type="text" id="username" name="username">
+        <input type="password" id="password" name="password">
         <input type="submit" value="登录">
     </form>
     <a href="/signup">注册</a>
+    <% if (locals.error) { %>
+    <div class="alert alert-error">
+        <a class="close" data-dismiss="alert" href="#">&times;</a>
+        <strong><%= error %></strong>
+    </div>
+    <% } %>
 </div>
 </body>
 </html>

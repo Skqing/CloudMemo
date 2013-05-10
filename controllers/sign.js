@@ -43,7 +43,7 @@ exports.doLogin = function(req, res, next) {
   var pass = sanitize(req.body.password).trim();
 
   if (!loginname || !pass) {
-    return res.render('sign/signin', { error: '信息不完整。' });
+    return res.render('index', { error: '信息不完整。' });
   }
 
   User.findOne(loginname, function (err, user) {
@@ -51,16 +51,16 @@ exports.doLogin = function(req, res, next) {
       return next(err);
     }
     if (!user) {
-      return res.render('sign/signin', { error: '这个用户不存在。' });
+      return res.render('index', { error: '这个用户不存在。' });
     }
     pass = security.md5(pass);
     if (pass !== user.pass) {
-      return res.render('sign/signin', { error: '密码错误。' });
+      return res.render('index', { error: '密码错误。' });
     }
     if (!user.active) {
       // 从新发送激活邮件
       mail.sendActiveMail(user.email, md5(user.email + config.session_secret), user.name, user.email);
-      return res.render('sign/signin', { error: '此帐号还没有被激活，激活链接已发送到 ' + user.email + ' 邮箱，请查收。' });
+      return res.render('index', { error: '此帐号还没有被激活，激活链接已发送到 ' + user.email + ' 邮箱，请查收。' });
     }
     // store session cookie
     gen_session(user, res);
@@ -72,6 +72,7 @@ exports.doLogin = function(req, res, next) {
         break;
       }
     }
+    console.log('redirect:'+refer);
     res.redirect(refer);
   });
 }
@@ -152,7 +153,7 @@ exports.doSignup = function(req, res, next) {
     user.save(function(err){
       if(err) return next(err);
       console.log('---注册成功！--');
-      res.render('home');
+      res.render('index'); //这个要做变量
     });
   });
 };

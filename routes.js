@@ -6,14 +6,23 @@
  * Description: 路由
  */
 
-
-var sign = require('./controllers/sign.js');
-var user = require('./controllers/user.js');
-var memo = require('./controllers/memo.js');
 var site = require('./controllers/site');
+var sign = require('./controllers/sign');
+var user = require('./controllers/user');
+var memo = require('./controllers/memo');
+
 
 module.exports = function(app) {
   app.get('/', site.index);
+
+  app.get('/home', site.home);  //测试使用
+
+  app.get('/login', sign.login);
+  app.post('/login', sign.doLogin);
+
   app.get('/signup', sign.signup);
   app.post('/signup', sign.doSignup);
+
+  app.post('/memo/write', memo.write);
+
 }
