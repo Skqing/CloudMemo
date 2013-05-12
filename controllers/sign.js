@@ -39,14 +39,14 @@ exports.login = function(req, res) {
  * @param {Function} next
  */
 exports.doLogin = function(req, res, next) {
-  var loginname = sanitize(req.body.username).trim().toLowerCase();
+  var username = sanitize(req.body.username).trim().toLowerCase();
   var pass = sanitize(req.body.password).trim();
 
-  if (!loginname || !pass) {
+  if (!username || !pass) {
     return res.render('index', { error: '信息不完整。' });
   }
 
-  User.findOne(loginname, function (err, user) {
+  User.findOne(username, function (err, user) {
     if (err) {
       return next(err);
     }
@@ -54,7 +54,7 @@ exports.doLogin = function(req, res, next) {
       return res.render('index', { error: '这个用户不存在。' });
     }
     pass = security.md5(pass);
-    if (pass !== user.pass) {
+    if (pass !== user.password) {
       return res.render('index', { error: '密码错误。' });
     }
     if (!user.active) {
@@ -64,6 +64,9 @@ exports.doLogin = function(req, res, next) {
     }
     // store session cookie
     gen_session(user, res);
+
+
+
     //check at some page just jump to home page
     var refer = req.session._loginReferer || 'home';  //跳转到用户请求之前想要到达的页面,否则跳转到主页
     for (var i = 0, len = notJump.length; i !== len; ++i) {  //这地方就不明白是在做什么了?
@@ -92,7 +95,7 @@ exports.signup = function(req, res) {
 exports.doSignup = function(req, res, next) {
   var name = sanitize(req.body.username).trim();
   name = sanitize(name).xss();
-  var loginname = name.toLowerCase();
+  var username = name.toLowerCase();
   var pass = sanitize(req.body.password).trim();
   pass = sanitize(pass).xss();
   var email = sanitize(req.body.useremail).trim();
@@ -130,11 +133,11 @@ exports.doSignup = function(req, res, next) {
     return ;
   }
 
-  User.find({'$or': [{'loginname': loginname}, {'email': email}]}, {}, function (err, users) {
+  User.findOne({'$or': [{'username': username}, {'email': email}]}, function (err, user) {
     if (err) {
       return next(err);
     }
-    if (users.length > 0) {
+    if (user) {
       res.render('sign/signup', {error: '用户名或邮箱已被使用。', name: name, email: email});
       return ;
     }
@@ -161,6 +164,6 @@ exports.doSignup = function(req, res, next) {
 
 // private
 function gen_session(user, res) {
-  var auth_token = security.encrypt(user._id + '\t' + user.name + '\t' + user.pass + '\t' + user.email, config.session_secret);
+  var auth_token = security.encrypt(user._id + '\t' + user.username + '\t' + user.password + '\t' + user.email, config.cookie_secret);
   res.cookie(config.auth_cookie_name, auth_token, {path: '/', maxAge: 1000 * 60 * 60 * 24 * 30}); //cookie 有效期30天
 }

@@ -22,7 +22,7 @@ $(function(){
       $.cookie('memotext', null);
 
       // 3.新建标签
-
+      $("#memotext").val('');
     }
   });
 
@@ -46,7 +46,11 @@ $(function(){
     // 2. 清空cookies
     $.cookie('memotext', null);
   });
-
+  //进入此页面，如果cookies中有内容，则显示到标签里面
+  var context = $.cookie('memotext');
+  if (context) {
+    $("#memotext").val(context);
+  }
 });
 
 

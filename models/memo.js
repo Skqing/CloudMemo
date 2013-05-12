@@ -11,13 +11,13 @@ var Schema = mongoose.Schema;
 var ObjectId = Schema.ObjectId;
 
 var MemoSchema = new Schema({
-  title: { type: String, index: true },
   context: { type: String, unique: true },
 
   create_at: { type: Date, default: Date.now },
-  update_at: { type: Date, default: Date.now },
-  create_by: { type: ObjectId },
-  update_by: { type: ObjectId }
+  create_by: { type: ObjectId }
+
+//  update_at: { type: Date, default: Date.now },
+//  update_by: { type: ObjectId }
 });
 
 //UserSchema.virtual('avatar_url').get(function () {

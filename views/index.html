@@ -5,19 +5,21 @@
     <link href="/css/index.css" rel="stylesheet" />
 </head>
 <body>
-<div>
-    <form action="/login" method="post">
-        <input type="text" id="username" name="username">
-        <input type="password" id="password" name="password">
-        <input type="submit" value="登录">
-    </form>
-    <a href="/signup">注册</a>
-    <% if (locals.error) { %>
-    <div class="alert alert-error">
-        <a class="close" data-dismiss="alert" href="#">&times;</a>
-        <strong><%= error %></strong>
+<div id="container">
+    <div id="loginform">
+        <form action="/login" method="post">
+            <input type="text" id="username" name="username">
+            <input type="password" id="password" name="password">
+            <input type="submit" value="登录">
+        </form>
+        <a href="/signup">注册</a>
+        <% if (locals.error) { %>
+        <div class="alert alert-error">
+            <a class="close" data-dismiss="alert" href="#">&times;</a>
+            <strong><%= error %></strong>
+        </div>
+        <% } %>
     </div>
-    <% } %>
 </div>
 </body>
 </html>
