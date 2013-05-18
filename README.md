@@ -3,14 +3,30 @@ CloudMemo
 
 云袖便签: 让生活更美好!
 
+CloudMemo 是一款由`Nodejs`和`MongoDB`搭建的便签网站，名字来源于云系列，基于`Nodejs`开发，使用`express`框架搭建，整体风格样式参考了网易的[LOFTER](http://www.lofter.com/)。  
+
+CloudMemo主要有以下功能：
+1. 写便签，记录工作事项
+2. 用户登录注册
+3. 第三方登录接口接入
+
+展望：  
+1. 支持登录背景切换
+2. 支持便签模版选择
+3. 支持移动客户端
 
 前端插件：
 
-消息提示插件：http://www.css88.com/EasyTools/javascript/jQueryPlugin/popbox/
-cookies插件：https://github.com/carhartl/jquery-cookie
+消息提示插件：  
+http://www.css88.com/EasyTools/javascript/jQueryPlugin/popbox/  
+cookies插件：  
+https://github.com/carhartl/jquery-cookie
 
-便签样式参考:
+便签样式参考:  
 http://www.w3cplus.com/solution/css3box/css3box.html
+
+参考架构：  
+http://cnodejs.org/topic/5007bd684764b72902c6aec9
 
 资源网址：
 http://www.daimg.com/search.php?kwtype=0&keyword=%B1%E3%C7%A9&channeltype=0&ext=0&pdi=0&size=0&starttime=-1&free=0
