@@ -6,11 +6,13 @@ CloudMemo
 CloudMemo 是一款由`Nodejs`和`MongoDB`搭建的便签网站，名字来源于云系列，基于`Nodejs`开发，使用`express`框架搭建，整体风格样式参考了网易的[LOFTER](http://www.lofter.com/)。  
 
 CloudMemo主要有以下功能：
+ 
 1. 写便签，记录工作事项
 2. 用户登录注册
 3. 第三方登录接口接入
 
-展望：  
+展望：
+
 1. 支持登录背景切换
 2. 支持便签模版选择
 3. 支持移动客户端
