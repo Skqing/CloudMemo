@@ -30,5 +30,8 @@ http://www.w3cplus.com/solution/css3box/css3box.html
 参考架构：  
 http://cnodejs.org/topic/5007bd684764b72902c6aec9
 
+每日图片和图片切换参考:  
+http://www.qiqiboy.com/2010/11/27/javascript-get-bing-image.html
+
 资源网址：
 http://www.daimg.com/search.php?kwtype=0&keyword=%B1%E3%C7%A9&channeltype=0&ext=0&pdi=0&size=0&starttime=-1&free=0
