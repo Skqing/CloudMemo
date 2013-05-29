@@ -4,35 +4,59 @@
     <title>欢迎 | 云袖笔记</title>
     <script type="text/javascript" src="/js/index.js"></script>
     <link href="/css/index.css" rel="stylesheet" />
+    
 </head>
 <body>
-<div id="container">
-    <div id="iWrap" class="iWrap">
-        <div class="iBgWrap"><img id="iPbg" src="/images/bg6.jpg" >
-
-    <div id="loginform" class="loginform">
-        <div class="logo"></div>
-        <div class="m-userlnks f-cb">
-                <a href="#" class="login ztag"><span>登录</span></a>
-                <a href="#" class="reg ztag"><span>开通博客</span></a>
-                <a href="#" class="review ztag"><span>浏览<b>&gt;</b></span> </a>
-            </div>
-        <form action="/login" method="post">
-            <input type="text" id="username" name="username">
-            <input type="password" id="password" name="password">
-            <input type="submit" value="登录">
-        </form>
-        <a href="/signup">注册</a>
-        <% if (locals.error) { %>
-        <div class="alert alert-error">
-            <a class="close" data-dismiss="alert" href="#">&times;</a>
-            <strong><%= error %></strong>
+    <div id="container">
+        <div id="iWrap" class="iWrap">
+            <div class="iBgWrap">
+                <img id="iPbg" src="/images/bg6.jpg" >
+                <div id="loginform" class="loginform">
+                    <div class="logo"></div>
+                    <div class="m-userlnks f-cb">
+                        <a href="#" class="login ztag">
+                            <span>登录</span>
+                        </a>
+                        <a href="#" class="reg ztag">
+                            <span>开通博客</span>
+                        </a>
+                        <a href="#" class="review ztag">
+                            <span>
+                                浏览 <b>&gt;</b>
+                            </span>
+                        </a>
+                    </div>
+                    <div class="contl">
+                    <h3>使用网易通行证 / 邮箱登录</h3>
+                    <form action="/login" method="post">
+                    <ul class="w-user w-user-1">
+                                    <li class="w0">
+                                        <div class="inpt ztag">
+                                            <!--<label class="ztag">网易通行证 / 邮箱</label>-->
+                                            <input type="text" tabindex="1" class="txt" placeholder="网易通行证 / 邮箱" id="username" name="username"/>
+                                        </div>
+                                    </li>
+                                    <li class="w0">
+                                        <div class="inpt"><label class="ztag">密码</label><input tabindex="2" name="password" type="password" placeholder="密码"class="txt" autocomplete="off" id="password" name="password"/></div>
+                                    </li>
+                                    <li class="w0 w2">
+                                        <button  tabindex="4" type='submit' class="btn ztag"><span>登录</span></button>
+                                    </li>
+                                    <li class="w0 w3 f-cb">
+                                        <span class="chkbox ztag"><span class="c ztag j-ok"><input id="c0" type="checkbox"/></span><a class="ztag" tabindex="3" href="#">记住密码</a></span>
+                                        <a class="fgt" href="http://reg.163.com/RecoverPassword.shtml" target="_blank">忘记密码</a>
+                                    </li>
+                                </ul>
+                            </form>
+                    <a href="/signup">注册</a>
+                    <% if (locals.error) { %>
+                    <div class="alert alert-error">
+                        <a class="close" data-dismiss="alert" href="#">&times;</a> <strong><%= error %></strong>
+                    </div>
+                    <% } %></div>
+                </div>
         </div>
-        <% } %>
+        </div>
     </div>
-  </div>
-
-</div>
-</div>
 </body>
 </html>
