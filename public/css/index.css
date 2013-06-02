@@ -17,10 +17,11 @@
  }
  .iWrap{
     width:100%;
-    height:100%;  
+    height:185%;  
     overflow:hidden;  
-    position:absolute;  top:0;  left:0;  
+    position:absolute;  top:-200px;  left:0;  
     text-align:center;
+    
 }
 .iWrap .iBgWrap{
     height:100%;  
@@ -29,6 +30,7 @@
     position:absolute;  top:0;  
     width:100%;  
 }
+
 .loginform {
     height:800px;  
     left:50%; 
@@ -71,7 +73,7 @@
     width: 422px;
     height: 172px;
 }
-.m-userlnks{padding-left: 40px;}
+.m-userlnks{padding-left: 140px;}
 .m-userlnks a{display:block;float:left;margin:0 7px;width:192px;height:52px;font-size:21px;letter-spacing:8px;text-align:center;line-height:52px;-moz-border-radius:2px;-webkit-border-radius:2px;border-radius:2px;*text-indent:-9999px;*overflow:hidden;}
 .m-userlnks a{width:184px;padding-left:8px;}
 .m-userlnks a span{display: none;}
@@ -93,8 +95,10 @@
     width:450px;
     text-align: left;
     padding-left: 5px;
+    margin-top: 10px;
+    padding-top: 5px;
     background-color: #fff;
-    position:relative;  top:0px; left: 48px;
+    position:relative;  top:0px; left:17%;
 
 }
 .contl h3{
@@ -122,5 +126,14 @@
 .w-user .btn span{font-size:20px;display:block;*text-indent:-9999px;letter-spacing:14px;display: none;}
 .w-user .btn{width:332px;padding-left:14px;*padding-left:0;height:40px;border:0;}
 .w-user .btn::-moz-focus-inner{border:0;}
-.w-user-1 .btn{*background-position:0 -869px;}
-.w-user-1 .btn:hover,.w-user-1 button.j-hover{*background-position:0 -923px;}.w-user-2 .w4 .txt{width:150px;}
+.w-user-1 .btn{background-position:0 -869px;}
+.w-user-1 .btn:hover,.w-user-1 button.j-hover{background-position:0 -923px;}.w-user-2 .w4 .txt{width:150px;}
+.w-user-2 button{background:url(/images/login-24.png);background-position:0 -976px;}
+.w-user-2 .btn {
+    padding-left:3px;
+    *padding-left:0;
+    background-position:0 -976px;
+}
+.w-user-2 .btn:hover,.w-user-2 button.j-hover {
+    background-position:0 -1029px;
+}
