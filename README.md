@@ -27,6 +27,9 @@ https://github.com/carhartl/jquery-cookie
 便签样式参考:  
 http://www.w3cplus.com/solution/css3box/css3box.html
 
+设计风格：
+http://designmodo.github.io/Flat-UI/
+
 参考架构：  
 http://cnodejs.org/topic/5007bd684764b72902c6aec9
 

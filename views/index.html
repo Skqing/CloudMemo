@@ -2,91 +2,44 @@
 <html>
 <head>
     <title>欢迎 | 云袖笔记</title>
+    <script type="text/javascript" src="/lib/jquery-2.0.0.min.js"></script>
     <script type="text/javascript" src="/js/index.js"></script>
-    <link href="/css/index.css" rel="stylesheet" />
-    
+    <link href="/css/index.css" rel="stylesheet"/>
+
 </head>
 <body>
-    <div id="container">
-        <div id="iWrap" class="iWrap">
-            <div class="iBgWrap">
-                <img id="iPbg" class="iPbg" src="/images/bg6.jpg" >
-                <div id="loginform" class="loginform">
-                    <div class="logo"></div>
-                    <div class="m-userlnks f-cb">
-                        <a href="#" class="login ztag">
-                            <span>登录</span>
-                        </a>
-                        <a href="#" class="reg ztag">
-                            <span>注册</span>
-                        </a>
+<div id="container">
+    <div id="loginform" class="loginform">
+        <div class="logo"></div>
+        <form id="sign" action="/login" method="post">
+            <ul class="w-user w-user-1">
+                <li>
+                    <div><label>邮箱</label>
+                        <input id="email" name="email" type="text" placeholder="邮箱" tabindex="0"/>
                     </div>
-                    <div class="contl">
-                    <form action="/login" method="post">
-                    <ul class="w-user w-user-1">
-                                    <li class="w0">
-                                        <div class="inpt ztag">
-                                            <!--<label class="ztag">网易通行证 / 邮箱</label>-->
-                                            <input type="text" tabindex="1" class="txt" placeholder="用户名" id="username" name="username"/>
-                                        </div>
-                                    </li>
-                                    <li class="w0">
-                                        <div class="inpt"><label class="ztag">密码</label><input tabindex="2" name="password" type="password" placeholder="密码"class="txt" autocomplete="off" id="password" name="password"/></div>
-                                    </li>
-                                    <li class="w0">
-                                        <button  tabindex="4" type='submit' class="btn ztag"><span>登录</span></button>
-                                    </li>
-                                    <li class="w0 w3 f-cb">
-                                        <span class="chkbox ztag"><span class="c ztag j-ok"><input id="c0" type="checkbox"/></span><a class="ztag" tabindex="3" href="#">记住密码</a></span>
-                                        <a class="fgt" href="http://reg.163.com/RecoverPassword.shtml" target="_blank">忘记密码</a>
-                                    </li>
-                                </ul>
-                            </form>
-                    <a href="/signup">注册</a>
-                    <% if (locals.error) { %>
-                    <div class="alert alert-error">
-                        <a class="close" data-dismiss="alert" href="#">&times;</a> <strong><%= error %></strong>
+                </li>
+                <li>
+                    <div><label>密码</label>
+                        <input id="pwd" name="password" type="password" placeholder="密码" autocomplete="off"tabindex="1"/>
                     </div>
-                    <% } %></div>
-                       <div class="contl">
-                    <form action="/signup" method="post">
-                    <ul class="w-user w-user-2">
-                                    <li class="w0">
-                                        <div class="inpt ztag">
-                                            <!--<label class="ztag">网易通行证 / 邮箱</label>-->
-                                            <input type="text" tabindex="1" class="txt" placeholder="用户名" id="username" name="username"/>
-                                        </div>
-                                    </li>
-                                    <li class="w0">
-                                        <div class="inpt ztag">
-                                            <!--<label class="ztag">网易通行证 / 邮箱</label>-->
-                                            <input type="text" tabindex="1" class="txt" placeholder="邮箱" id="useremail" name="useremail"/>
-                                        </div>
-                                    </li>
-                                    <li class="w0">
-                                        <div class="inpt"><label class="ztag">密码</label><input tabindex="2" name="password" type="password" placeholder="密码"class="txt" autocomplete="off" id="password" name="password"/></div>
-                                    </li>
-                                    <li class="w0">
-                                        <div class="inpt"><label class="ztag">重复密码</label><input tabindex="2" id="re_pwd" name="re_pwd" placeholder="重复密码"class="txt" autocomplete="off" id="password" name="password"/></div>
-                                    </li>
-                                    <li class="w0">
-                                        <button  tabindex="4" type='submit' class="btn ztag"><span>登录</span></button>
-                                    </li>
-                                    <li class="w0 w3 f-cb">
-                                        <span class="chkbox ztag"><span class="c ztag j-ok"><input id="c0" type="checkbox"/></span><a class="ztag" tabindex="3" href="#">记住密码</a></span>
-                                        <a class="fgt" href="http://reg.163.com/RecoverPassword.shtml" target="_blank">忘记密码</a>
-                                    </li>
-                                </ul>
-                            </form>
-                    <a href="/signup">注册</a>
-                    <% if (locals.error) { %>
-                    <div class="alert alert-error">
-                        <a class="close" data-dismiss="alert" href="#">&times;</a> <strong><%= error %></strong>
+                </li>
+                <li>
+                    <div><label>确认密码</label>
+                        <input id="repwd" name="re_pwd" type="password" placeholder="确认密码" autocomplete="off"tabindex="2"/>
                     </div>
-                    <% } %></div>
-                </div>
-        </div>
-        </div>
+                </li>
+                <li>
+                    <button id="login" type='button' tabindex="3"><span>登录</span></button>
+                </li>
+                <li>
+                    <button id="signup" type='button' tabindex="4"><span>注册</span></button>
+                </li>
+                <li>
+                    <a href="/resetpwd" target="_blank">忘记密码</a>
+                </li>
+            </ul>
+        </form>
     </div>
+</div>
 </body>
 </html>

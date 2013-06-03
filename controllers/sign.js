@@ -81,9 +81,9 @@ exports.doLogin = function(req, res, next) {
 }
 
 //sign up
-exports.signup = function(req, res) {
-  res.render('sign/signup');
-};
+//exports.signup = function(req, res) {
+//  res.render('sign/signup');
+//};
 
 /**
  * Handle user signup.
@@ -92,54 +92,56 @@ exports.signup = function(req, res) {
  * @param {HttpResponse} res
  * @param {Function} next
  */
-exports.doSignup = function(req, res, next) {
-  var name = sanitize(req.body.username).trim();
-  name = sanitize(name).xss();
-  var username = name.toLowerCase();
-  var pass = sanitize(req.body.password).trim();
-  pass = sanitize(pass).xss();
-  var email = sanitize(req.body.useremail).trim();
+exports.signup = function(req, res, next) {
+//  var name = sanitize(req.body.username).trim();
+//  name = sanitize(name).xss();
+//  var username = name.toLowerCase();
+
+  var email = sanitize(req.body.email).trim();
   email = email.toLowerCase();
   email = sanitize(email).xss();
+  var pass = sanitize(req.body.password).trim();
+  pass = sanitize(pass).xss();
   var re_pass = sanitize(req.body.re_pwd).trim();
   re_pass = sanitize(re_pass).xss();
 
-  if (name === '' || pass === '' || re_pass === '' || email === '') {
-    res.render('sign/signup', {error: '信息不完整。', name: name, email: email});
-    return ;
+  if (email === '') {
+    var msg = {status: 'failure', field:'email,', info:'邮箱不能为空!', data: ''};
+    res.writeHead(200, {'Content-Type': 'application/json'});
+    res.send(JSON.stringify(msg));
   }
-
-  if (name.length < 5) {
-    res.render('sign/signup', {error: '用户名至少需要5个字符。', name: name, email: email});
-    return ;
-  }
-
   try {
-    check(name, '用户名只能使用0-9，a-z，A-Z。').isAlphanumeric();
+    check(email, '邮箱格式不正确!').isEmail();
   } catch (e) {
-    res.render('sign/signup', {error: e.message, name: name, email: email});
-    return ;
+    var msg = {status:'failure', field:'email,', info: e.message, data: ''};
+    res.writeHead(200, {'Content-Type': 'application/json'});
+    res.send(JSON.stringify(msg));
+  }
+  if (pass === '') {
+    var msg = {status: 'failure', field:'password,', info:'密码不能为空!', data: ''};
+    res.writeHead(200, {'Content-Type': 'application/json'});
+    res.send(JSON.stringify(msg));
+  }
+  if (re_pass === '') {
+    var msg = {status: 'failure', field:'re_pwd,', info:'确认密码不能为空!', data: ''};
+    res.writeHead(200, {'Content-Type': 'application/json'});
+    res.send(JSON.stringify(msg));
   }
 
   if (pass !== re_pass) {
-    res.render('sign/signup', {error: '两次密码输入不一致。', name: name, email: email});
-    return ;
+    var msg = {status: 'failure', field:'re_pwd,', info:'两次密码输入不一致!', data: ''};
+    res.writeHead(200, {'Content-Type': 'application/json'});
+    res.send(JSON.stringify(msg));
   }
 
-  try {
-    check(email, '不正确的电子邮箱。').isEmail();
-  } catch (e) {
-    res.render('sign/signup', {error: e.message, name: name, email: email});
-    return ;
-  }
-
-  User.findOne({'$or': [{'username': username}, {'email': email}]}, function (err, user) {
+  User.findOne({'email': email}, function (err, user) {
     if (err) {
       return next(err);
     }
     if (user) {
-      res.render('sign/signup', {error: '用户名或邮箱已被使用。', name: name, email: email});
-      return ;
+      var msg = {status: 'failure', field:'email,', info:'此邮箱已被使用，请换一个重试!', data: ''};
+      res.writeHead(200, {'Content-Type': 'application/json'});
+      res.send(JSON.stringify(msg));
     }
 
     // md5 the pass
@@ -148,15 +150,17 @@ exports.doSignup = function(req, res, next) {
     var avatar_url = 'http://www.gravatar.com/avatar/' + security.md5(email.toLowerCase()) + '?size=48';
 
     var user = new User();
+    var name = email.split('@')[0];
     user.username = name;
     user.password = pass;
     user.email = email;
     user.avatar = avatar_url;
-    user.active = true;  //产品模式为false
     user.save(function(err){
       if(err) return next(err);
       console.log('---注册成功！--');
-      res.render('index'); //这个要做变量
+      var msg = {status: 'success', field:',', info:'注册成功!', data: ''};
+      res.writeHead(200, {'Content-Type': 'application/json'});
+      res.send(JSON.stringify(msg));
     });
   });
 };

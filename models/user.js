@@ -21,7 +21,6 @@ var UserSchema = new Schema({
 
   create_at: { type: Date, default: Date.now },
   update_at: { type: Date, default: Date.now },
-  active: { type: Boolean, default: true }
 });
 
 UserSchema.virtual('avatar_url').get(function () {

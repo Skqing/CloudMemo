@@ -26,13 +26,42 @@ function getBingImage(idx,number,callback) {//callback为回调函数，即数�
 
 // 回调函数
 function setBg(data){
-    document.getElementById('iPbg').background='url(data[0].imgurl) center center no-repeat';
+    document.getElementById('iPbg').background = 'url(data[0].imgurl) center center no-repeat';
 }
 
 // 每日图片,和图片切换
 $(function(){
-  getBingImage(0,1,setBg);
+  //getBingImage(0,1,setBg);
 
   //图片切换
-  
+
+
+
+  //用户登录
+  $("#login").click(function() {
+    var form = $("#sign").serializeArray();
+    console.log('登录请求数据:');
+    console.log(form);
+    $.getJSON('/login', form, function(data) {
+      console.log('登录返回数据:');
+      console.log(data);
+      if (data) {
+        if (data.status == 'success') {
+
+        } else if (data.status == 'failure') {
+
+        }
+      } else {
+        alert('获取数据失败，请重试!');
+      }
+    });
+  });
+
+  $("#signup")
+
+  //用户注册
+
+
+
+
 });
