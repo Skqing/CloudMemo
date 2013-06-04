@@ -17,11 +17,9 @@ module.exports = function(app) {
 
   app.get('/home', site.home);  //测试使用
 
-  app.get('/login', sign.login);
-  app.post('/login', sign.doLogin);
+  app.post('/login', sign.login);
 
-  app.get('/signup', sign.signup);
-  app.post('/signup', sign.doSignup);
+  app.post('/signup', sign.signup);
 
   app.post('/memo/write', memo.write);
 
