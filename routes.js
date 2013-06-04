@@ -12,15 +12,16 @@ var user = require('./controllers/user');
 var memo = require('./controllers/memo');
 
 
-module.exports = function(app) {
-  app.get('/', site.index);
+module.exports = function (app) {
+    app.get('/', site.index);
 
-  app.get('/home', site.home);  //测试使用
+    app.get('/home', site.home);  //测试使用
+    app.get('/form', site.form);  //测试使用
 
-  app.post('/login', sign.login);
+    app.post('/login', sign.login);
 
-  app.post('/signup', sign.signup);
+    app.post('/signup', sign.signup);
 
-  app.post('/memo/write', memo.write);
+    app.post('/memo/write', memo.write);
 
 }

@@ -1,15 +1,26 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>欢迎 | 云袖笔记</title>
-    <script type="text/javascript" src="/lib/jquery-2.0.0.min.js"></script>
-    <script type="text/javascript" src="/js/index.js"></script>
+    <title>欢迎 | 云袖便签</title>
+    <link href="/css/reset.css" rel="stylesheet"/>
     <link href="/css/index.css" rel="stylesheet"/>
 
+    <script type="text/javascript" src="/lib/jquery-2.0.0.min.js"></script>
+    <script type="text/javascript" src="/js/index.js"></script>
 </head>
 <body>
 <div id="container">
-    <div id="loginform" class="loginform">
+    <div class="line logo_line">
+        <div class="box">
+            <span><img class="logo" src="/images/logo.gif" alt="cloudemome"/></span>
+            <span class="slogan">云袖便签 | 让我们的生活更美好!</span>
+        </div>
+    </div>
+    <div class="loginbut">
+        <span id="showlogin" class="but"><img src="/images/logo.png" alt="Login"/></span>
+        <span id="showsignup" class="but"><img src="/images/logo.png" alt="Signup"/></span>
+    </div>
+    <div class="loginform">
         <div class="logo"></div>
         <form id="sign" action="/login" method="post">
             <ul class="w-user w-user-1">
@@ -43,3 +54,4 @@
 </div>
 </body>
 </html>
+

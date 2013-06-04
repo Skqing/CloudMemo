@@ -15,3 +15,8 @@ exports.home = function(req, res, next) {
 
   res.render('home');
 }
+
+exports.form = function(req, res, next) {
+
+    res.render('form');
+}

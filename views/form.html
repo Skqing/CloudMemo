@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>表单样式测试</title>
+    <style type="text/css">
+        li {
+            border-bottom:thin dashed #bbbcb8;
+        }
+    </style>
+</head>
+<body>
+<div class="loginform">
+    <div class="logo"></div>
+    <form id="sign" action="/login" method="post">
+        <ul class="w-user w-user-1">
+            <li>
+                <div><label>邮箱</label>
+                    <input id="email" name="email" type="text" placeholder="邮箱" tabindex="0"/>
+                </div>
+            </li>
+            <li>
+                <div><label>密码</label>
+                    <input id="pwd" name="password" type="password" placeholder="密码" autocomplete="off"tabindex="1"/>
+                </div>
+            </li>
+            <li>
+                <div><label>确认密码</label>
+                    <input id="repwd" name="re_pwd" type="password" placeholder="确认密码" autocomplete="off"tabindex="2"/>
+                </div>
+            </li>
+            <li>
+                <button id="login" type='button' tabindex="3"><span>登录</span></button><a href="/resetpwd" target="_blank">忘记密码</a>
+            </li>
+        </ul>
+    </form>
+</div>
+</body>
+</html>
