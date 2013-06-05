@@ -2,35 +2,66 @@
 <html>
 <head>
     <title>表单样式测试</title>
+	<link href='http://fonts.googleapis.com/css?family=Finger+Paint' rel='stylesheet' type='text/css'>
     <style type="text/css">
+		a {text-decoration:none; }
+		ul {margin: 0px; padding: 0px;}
         li {
-            border-bottom:thin dashed #bbbcb8;
+            border-bottom : thin dashed #bbbcb8;
         }
+		ul li {
+			list-style-type:none;
+		}
+		.loginform {
+			width: 280px;
+		}
+		.loginform_red {
+			border : thin solid #FF0084
+		}
+		.loginform_blue {
+			border : thin solid #0063DC;
+		}
+		
+		.signlab {
+			font-family: 'Finger Paint', cursive;
+		}
+		.loginform input {
+			border : none;
+			outline: none;
+			-webkit-appearance: none;
+		}
+		.loginform input:focus {
+			border : none;
+			outline: none;
+			-webkit-appearance: none;
+			
+		}
     </style>
 </head>
 <body>
-<div class="loginform">
-    <div class="logo"></div>
+<div class="loginform loginform_blue">
     <form id="sign" action="/login" method="post">
         <ul class="w-user w-user-1">
+			<li>&nbsp;</li>
             <li>
-                <div><label>邮箱</label>
-                    <input id="email" name="email" type="text" placeholder="邮箱" tabindex="0"/>
+                <div><label class="signlab">邮箱:</label>
+                    <input id="email" name="email" type="text" tabindex="0"/>
                 </div>
             </li>
             <li>
-                <div><label>密码</label>
-                    <input id="pwd" name="password" type="password" placeholder="密码" autocomplete="off"tabindex="1"/>
+                <div><label class="signlab">密码:</label>
+                    <input id="pwd" name="password" type="password" autocomplete="off"tabindex="1"/>
                 </div>
             </li>
             <li>
-                <div><label>确认密码</label>
-                    <input id="repwd" name="re_pwd" type="password" placeholder="确认密码" autocomplete="off"tabindex="2"/>
+                <div><label class="signlab">确认密码:</label>
+                    <input id="repwd" name="re_pwd" type="password" autocomplete="off"tabindex="2"/>
                 </div>
             </li>
             <li>
                 <button id="login" type='button' tabindex="3"><span>登录</span></button><a href="/resetpwd" target="_blank">忘记密码</a>
             </li>
+			<li>&nbsp;</li>
         </ul>
     </form>
 </div>

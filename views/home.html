@@ -3,28 +3,157 @@
 <head>
     <title>主页 | 云袖便签</title>
     <link href="/css/home.css" rel="stylesheet" />
+	<link href="http://fonts.googleapis.com/css?family=Reenie+Beanie:regular" rel="stylesheet" type="text/css">
     <script type="text/javascript" src="/lib/jquery-2.0.0.min.js"></script>
     <script type="text/javascript" src="/lib/jquery.cookie.js"></script>
 
     <script type="text/javascript" src="/js/home.js"></script>
+
+	<style type="text/css">
+    *{
+      margin:0;
+      padding:0;
+    }
+    body{
+      font-family:arial,sans-serif;
+      font-size:100%;
+      margin:3em;
+      background:#D6DBDF;
+      color:#fff;
+    }
+    h2,p {
+      font-size:100%;
+      font-weight:normal;
+    }
+    ul,li {
+      list-style:none;
+    }
+    ul {
+      overflow:hidden;
+      padding:3em;
+    }
+    ul li a {
+        text-decoration: none;
+		color: #000;
+		background: #ffc;
+		display: block;
+		height: 10em;
+		width: 10em;
+		padding: 1em; /* Firefox */
+		-moz-box-shadow: 5px 5px 7px rgba(33,33,33,1); /* Safari+Chrome */
+		-webkit-box-shadow: 5px 5px 7px rgba(33,33,33,.7); /* Opera */
+		box-shadow: 5px 5px 7px rgba(33,33,33,.7);
+
+		-moz-transition:-moz-transform .15s linear;
+	    -o-transition:-o-transform .15s linear;
+	    -webkit-transition:-webkit-transform .15s linear;
+    }
+    ul li{
+      margin:1em;
+      float:left;
+    }
+
+	ul li h2
+	{
+		font-size: 140%;
+		font-weight: bold;
+		padding-bottom: 10px;
+	}
+	ul li p
+	{
+		font-family: "Reenie Beanie" ,arial,sans-serif,微软雅黑;
+		font-size: 110%;
+	}
+
+	ul li:first-child a {
+		height: 12em;
+		width: 10em;
+
+	}
+
+	ul li:nth-child(even) a {
+      -o-transform:rotate(4deg);
+      -webkit-transform:rotate(4deg);
+      -moz-transform:rotate(4deg);
+      position:relative;
+      top:5px;
+	  -o-transform:rotate(4deg);
+      -webkit-transform:rotate(4deg);
+      -moz-transform:rotate(4deg);
+      position:relative;
+      top:5px;
+      background:#cfc;
+    }
+    ul li:nth-child(3n) a {
+      -o-transform:rotate(-3deg);
+      -webkit-transform:rotate(-3deg);
+      -moz-transform:rotate(-3deg);
+      position:relative;
+      top:-5px;
+	  -o-transform:rotate(-3deg);
+      -webkit-transform:rotate(-3deg); 
+      -moz-transform:rotate(-3deg);
+      position:relative;
+      top:-5px;
+      background:#ccf;
+    }
+    ul li:nth-child(5n) a {
+      -o-transform:rotate(5deg);
+      -webkit-transform:rotate(5deg);
+      -moz-transform:rotate(5deg);
+      position:relative;
+      top:-10px;
+    }
+
+	ul li a:hover,ul li a:focus {
+	  -moz-box-shadow:10px 10px 7px rgba(0,0,0,.7);
+	  -webkit-box-shadow: 10px 10px 7px rgba(0,0,0,.7);
+	  box-shadow:10px 10px 7px rgba(0,0,0,.7);
+	  -webkit-transform: scale(1.25);
+	  -moz-transform: scale(1.25);
+	  -o-transform: scale(1.25);
+	  position:relative;
+	  z-index:5;
+	}
+    </style>
 </head>
 <body>
-    <div id="desktop">
+    <div id="container">
         <div id="top">
         </div>
-        <div id="memo">
-            <div class="innerstyle">
-                <div id="context">
-                    <textarea id="memotext" cols="20" rows="13" wrap="physical"></textarea>
-                </div>
-            </div>
-            <div id="tools">
-                <ul>
-                    <li><button id="clear">清空</button> </li><li><button id="filling">归档</button></li>
-                </ul>
-            </div>
-        </div>
-        <div id="memolist"></div>
+        <div id="memolist">
+			<ul>
+				<li><a href="#">
+					<input type="text" size="10">
+					<textarea id="memotext" cols="20" rows="10" wrap="physical"></textarea>	
+					<button id="clear">清空</button><button id="filling">归档</button>
+				</a></li>
+				<li><a href="#">
+					<h2>Dudu：</h2>
+					<p>最近咋没有美女发帖呢？我一定给个头条推荐,recommend!recommend!</p>
+				</a></li>
+				<li><a href="#">
+					<h2>汤姆大叔：</h2>
+					<p>Team的一个成员去了Microsoft做SDE3，又得hire new member了</p>
+				</a></li>
+				<li><a href="#">
+					<h2>技术弟弟：</h2>
+					<p>O2DS和我翻译的书是一样，我一定要比他翻得快, 晚上加班翻,fast! fast! fast!</p>
+				</a></li>
+				<li><a href="#">
+					<h2>Artech：</h2>
+					<p>WCF的帖子真是少，看来我得多发点帖子让大家学习呢</p>
+				</a></li>
+				<li><a href="#">
+					<h2>吉日嘎拉：</h2>
+					<p>将权限管理、工作流管理做到我能力的极致，一个人只能做好那么很少的几件事情</p>
+				</a></li>
+				<li><a href="#">
+					<h2>某武林高手：</h2>
+					<p>低于25000块的面试再也不去了，它grandma的</p>
+				</a></li>
+			</ul>
+		</div>
     </div>
 </body>
 </html>
