@@ -47,7 +47,7 @@ exports.login = function (req, res, next) {
         res.send(msg);
     }
     if (!pass) {
-        var msg = {status: 'failure', field: 'password,', info: '密码不能为空!', data: ''};
+        var msg = {status: 'failure', field: 'password', info: '密码不能为空!', data: ''};
         res.send(msg);
     }
 
@@ -108,15 +108,15 @@ exports.signup = function (req, res, next) {
         res.send(msg);
     }
     if (!pass) {
-        var msg = {status: 'failure', field: 'password,', info: '密码不能为空!', data: ''};
+        var msg = {status: 'failure', field: 'password', info: '密码不能为空!', data: ''};
         res.send(msg);
     }
     if (!re_pass) {
-        var msg = {status: 'failure', field: 're_pwd,', info: '确认密码不能为空!', data: ''};
+        var msg = {status: 'failure', field: 're_pwd', info: '确认密码不能为空!', data: ''};
         res.send(msg);
     }
     if (pass !== re_pass) {
-        var msg = {status: 'failure', field: 're_pwd,', info: '两次密码输入不一致!', data: ''};
+        var msg = {status: 'failure', field: 're_pwd', info: '两次密码输入不一致!', data: ''};
         res.send(msg);
     }
 
@@ -125,7 +125,7 @@ exports.signup = function (req, res, next) {
             return next(err);
         }
         if (user) {
-            var msg = {status: 'failure', field: 'email,', info: '此邮箱已被使用，请换一个重试!', data: ''};
+            var msg = {status: 'failure', field: 'email', info: '此邮箱已被使用，请换一个重试!', data: ''};
             res.send(msg);
         }
 
@@ -143,7 +143,7 @@ exports.signup = function (req, res, next) {
         user.save(function (err) {
             if (err) return next(err);
             console.log('---注册成功！--');
-            var msg = {status: 'success', field: ',', info: '注册成功!', data: ''};
+            var msg = {status: 'success', field: '', info: '注册成功!', data: ''};
             res.send(msg);
         });
     });

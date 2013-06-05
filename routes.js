@@ -17,6 +17,7 @@ module.exports = function (app) {
 
     app.get('/home', site.home);  //测试使用
     app.get('/form', site.form);  //测试使用
+    app.get('/flatform', site.flatform);  //测试使用
 
     app.post('/login', sign.login);
 

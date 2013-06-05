@@ -34,6 +34,11 @@ http://designmodo.github.io/Flat-UI/
 http://www.lofter.com/
 http://wujb.cnodejs.net/
 
+瀑布流参考：
+http://www.cnblogs.com/leolai/archive/2013/04/23/3038159.html
+http://ued.taobao.com/blog/2011/09/waterfall/
+
+
 参考架构：  
 http://cnodejs.org/topic/5007bd684764b72902c6aec9
 
