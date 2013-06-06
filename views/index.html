@@ -17,38 +17,15 @@
         </div>
     </div>
     <div class="loginbut">
-        <span id="showlogin" class="but"><img src="/images/logo.png" alt="Login"/></span>
-        <span id="showsignup" class="but"><img src="/images/logo.png" alt="Signup"/></span>
-    </div>
-    <div class="loginform">
-        <div class="logo"></div>
-        <form id="sign" action="/login" method="post">
-            <ul class="w-user w-user-1">
-                <li>
-                    <div><label>邮箱</label>
-                        <input id="email" name="email" type="text" placeholder="邮箱" tabindex="0"/>
-                    </div>
-                </li>
-                <li>
-                    <div><label>密码</label>
-                        <input id="pwd" name="password" type="password" placeholder="密码" autocomplete="off"tabindex="1"/>
-                    </div>
-                </li>
-                <li>
-                    <div><label>确认密码</label>
-                        <input id="repwd" name="re_pwd" type="password" placeholder="确认密码" autocomplete="off"tabindex="2"/>
-                    </div>
-                </li>
-                <li>
-                    <button id="login" type='button' tabindex="3"><span>登录</span></button>
-                </li>
-                <li>
-                    <button id="signup" type='button' tabindex="4"><span>注册</span></button>
-                </li>
-                <li>
-                    <a href="/resetpwd" target="_blank">忘记密码</a>
-                </li>
-            </ul>
+        <form id="sign">
+        <div class="control-group">
+            <input type="text" class="login-field" value="" placeholder="邮箱" id="login-name" />
+            <label class="login-field-icon fui-user" for="login-name"></label>
+        </div>
+        <div class="control-group">
+            <input type="password" class="login-field" value="" placeholder="密码" id="login-pass" />
+            <label class="login-field-icon fui-lock" for="login-pass"></label>
+        </div>
         </form>
     </div>
 </div>
