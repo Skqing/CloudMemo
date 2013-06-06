@@ -20,3 +20,8 @@ exports.form = function(req, res, next) {
 
     res.render('form');
 }
+
+exports.flatform = function(req, res, next) {
+
+    res.render('flatform');
+}
