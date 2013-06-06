@@ -20,8 +20,9 @@ module.exports = function (app) {
     app.get('/flatform', site.flatform);  //测试使用
 
     app.post('/login', sign.login);
-
     app.post('/signup', sign.signup);
+    app.get('/signup/resetpwd', sign.resetpwd);
+    app.post('/signup/resetpwd', sign.resetpwd);
 
     app.post('/memo/write', memo.write);
 

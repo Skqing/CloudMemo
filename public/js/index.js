@@ -38,41 +38,60 @@ $(function () {
 
     //用户登录
     $("#login").click(function () {
+//        var repwdbut = $("#re_pwd");
+//        var repwdhtml = "<div class='control-group'>"
+//            + "<input id='re_pwd' type='password' class='login-field' placeholder='确认密码' />"
+//            + "<label class='login-field-icon fui-lock' for='re_pwd'></label>"
+//            + "</div>";
+//        $(repwdhtml).before( $("div.control-group")[0]);
+        var repwdbut = $("div.repwd").css('display');
         var form = $("#sign").serialize();
-        console.log('登录请求数据:');
+        console.log('请求数据:');
         console.log(form);
-        $.post('/login', form, function (data) {
-            console.log('登录返回数据:');
-            console.log(data);
-            if (data) {
-                if (data.status == 'success') {
-                    window.location.href = '/home';
-                } else if (data.status == 'failure') {
-
+        if (repwdbut == 'none') {
+            $.post('/login', form, function (data) {
+                console.log('登录返回数据:');
+                console.log(data);
+                if (data) {
+                    if (data.status == 'success') {
+                        window.location.href = '/home';
+                    } else if (data.status == 'failure') {
+                        alert(data.status);
+                    }
+                } else {
+                    alert('获取数据失败，请重试!');
                 }
-            } else {
-                alert('获取数据失败，请重试!');
-            }
-        }, 'json');
+            }, 'json');
+        } else {
+            $.post('/signup', form, function (data) {
+                console.log('注册返回数据:');
+                console.log(data);
+                if (data) {
+                    if (data.status == 'success') {
+                        window.location.href = '/home';
+                    } else if (data.status == 'failure') {
+                        alert(data.status);
+                    }
+                } else {
+                    alert('获取数据失败，请重试!');
+                }
+            }, 'json');
+        }
     });
 
     $("#signup").click(function() {
-        var form = $("#sign").serialize();
-        console.log('注册请求数据:');
-        console.log(form);
-        $.post('/signup', form, function (data) {
-            console.log('注册返回数据:');
-            console.log(data);
-            if (data) {
-                if (data.status == 'success') {
-                    window.location.href = '/home';
-                } else if (data.status == 'failure') {
-
-                }
-            } else {
-                alert('获取数据失败，请重试!');
-            }
-        }, 'json');
+        var repwdbut = $("div.repwd").css('display');
+        if (repwdbut == 'none') {
+            $("div.repwd").css('display', 'block');
+            $("a.getpwd-link").css('display', 'none');
+            $("#login").text('注  册');
+            $("#signup").text('登录');
+        } else {
+            $("div.repwd").css('display', 'none');
+            $("a.getpwd-link").css('display', 'inline-block');
+            $("#login").text('登  录');
+            $("#signup").text('注册');
+        }
     });
 
     //用户注册

@@ -9,7 +9,8 @@
 
 
 body {
-    background: url("/images/bg.png") repeat;
+    background: url("/images/bg.png") no-repeat;
+    background-color: #ffffff;
     overflow: hidden;
 }
 
@@ -50,12 +51,111 @@ body, textarea, select, input, button {
 .loginbut {
     position: absolute;
     left: 50%;
-    top: 40%;
+    top: 45%;
     cursor: pointer;
     width: 420px;
     margin-left: -210px;
     opacity: 1;
     visibility: visible;
+}
+
+
+/****** form style ******/
+.login-form {
+    position: absolute;
+    left: 50%;
+    top: 40%;
+    width: 420px;
+    margin-left: -210px;
+    opacity: 1;
+    visibility: visible;
+    background-color: #edeff1;
+    padding: 24px 23px 20px;
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    border-radius: 6px;
+}
+
+
+.login-form .control-group {
+    margin-bottom: 6px;
+    position: relative;
+}
+
+.login-form .login-field {
+    border-color: transparent;
+    font-size: 17px;
+    padding-bottom: 6px;
+    padding-top: 11px;
+    text-indent: 3px;
+    width: 299px;
+    margin-bottom: 10px !important;
+}
+
+.login-form .login-field-icon {
+    color: #bfc9ca;
+    font-size: 16px;
+    position: absolute;
+    right: 13px;
+    top: 14px;
+    -webkit-transition: 0.25s;
+    -moz-transition: 0.25s;
+    -o-transition: 0.25s;
+    transition: 0.25s;
+    -webkit-backface-visibility: hidden;
+}
+
+.fui-user {
+    font-family: 'Flat-UI-Icons';
+    font-weight: normal;
+}
+
+.fui-lock {
+    font-family: 'Flat-UI-Icons';
+    font-weight: normal;
+}
+
+.btn.btn-primary {
+    background-color: #1abc9c;
+}
+.btn.btn-large {
+    font-size: 16.996px;
+    /* 17px */
+    line-height: 20px;
+    padding: 12px 18px 13px;
+}
+.btn {
+    border: none;
+    background: #bdc3c7;
+    color: #ffffff;
+    padding: 9px 12px 10px;
+    line-height: 22px;
+    text-decoration: none;
+    text-shadow: none;
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    border-radius: 6px;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+    -webkit-transition: 0.25s;
+    -moz-transition: 0.25s;
+    -o-transition: 0.25s;
+    transition: 0.25s;
+    -webkit-backface-visibility: hidden;
+}
+
+
+.btn:focus {  /**登录按钮获得焦点的时候不变颜色，但没起作用*/
+    outline: none;
+}
+.btn:hover{  /**鼠标在登录按钮上浮动的时候不变颜色，但没起作用*/
+    text-decoration: none;
+}
+
+
+.repwd {
+    display: none;
 }
 
 

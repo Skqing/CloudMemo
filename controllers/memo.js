@@ -35,6 +35,7 @@ exports.write = function (req, res, next) {
     console.log(text);
     var msg = { status: 'success', info: '写入成功!' };
     res.send(msg);  //给客户端返回一个json格式的数据
+    return true;
 }
 
 /**
@@ -155,7 +156,16 @@ exports.count = function(req, res, next) {
  * @param next
  */
 exports.waterfall = function(req, res, next) {
-
+    Memo.find({create_at: {$gte: begindate, $lte: enddate}}, function (err, memos) {
+        if (err) {
+            return next(err);
+        }
+        if (!memos) {
+            res.contentType('json');  //返回的数据类型
+            res.send(JSON.stringify({ status: "success", message: '获取便签综述成功！', data: memos }));  //给客户端返回一个json格式的数据
+            res.end();
+        }
+    });
 }
 
 /**

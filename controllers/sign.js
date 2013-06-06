@@ -14,16 +14,6 @@ var check = require('validator').check,
 var config = require('../config');
 var security = require('../utils/security_utils');
 
-/**
- * define some page when login just jump to the home page
- * @type {Array}
- */
-var notJump = [
-    '/active_account', //active page
-    '/reset_pass',     //reset password page, avoid to reset twice
-    '/signup',         //regist page
-    '/search_pass'    //serch pass page
-];
 
 //login
 //exports.login = function (req, res) {
@@ -39,8 +29,9 @@ var notJump = [
  * @param {Function} next
  */
 exports.login = function (req, res, next) {
-    var email = sanitize(req.body.email).trim().toLowerCase();
-    var pass = sanitize(req.body.password).trim();
+    console.log('------用户登录-----');
+    var email = req.body.email;
+    var pass = req.body.password;
 
     if (!email) {
         var msg = {status: 'failure', field: 'email,', info: '邮箱不能为空!', data: ''};
@@ -50,6 +41,8 @@ exports.login = function (req, res, next) {
         var msg = {status: 'failure', field: 'password', info: '密码不能为空!', data: ''};
         res.send(msg);
     }
+    email = sanitize(email).trim().toLowerCase();
+    pass = sanitize(pass).trim();
 
     User.findOne({'email': email}, function (err, user) {
         if (err) {
@@ -88,7 +81,7 @@ exports.signup = function (req, res, next) {
 //  var name = sanitize(req.body.username).trim();
 //  name = sanitize(name).xss();
 //  var username = name.toLowerCase();
-
+    console.log('------用户注册-----');
     var email = sanitize(req.body.email).trim();
     email = email.toLowerCase();
     email = sanitize(email).xss();
@@ -125,7 +118,7 @@ exports.signup = function (req, res, next) {
             return next(err);
         }
         if (user) {
-            var msg = {status: 'failure', field: 'email', info: '此邮箱已被使用，请换一个重试!', data: ''};
+            var msg = {status: 'failure', field: 'email', info: '此邮箱已被使用，请换一个重试!'};
             res.send(msg);
         }
 
@@ -143,12 +136,29 @@ exports.signup = function (req, res, next) {
         user.save(function (err) {
             if (err) return next(err);
             console.log('---注册成功！--');
-            var msg = {status: 'success', field: '', info: '注册成功!', data: ''};
+            var msg = {status: 'success', info: '注册成功!'};
             res.send(msg);
         });
     });
 };
 
+/**
+ * 重设密码
+ * @param req
+ * @param res
+ * @param next
+ */
+exports.resetpwd = function (req, res, next) {
+    var method = req.method;
+    if (method == 'get') {
+        res.render('sign/resetpwd');
+    } else if (method == 'post') {
+
+    } else {
+        var msg = {status: 'failure', info: '访问错误!'};
+        res.send(msg);
+    }
+}
 
 // private
 function gen_session(user, res) {
