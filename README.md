@@ -39,7 +39,14 @@ http://wujb.cnodejs.net/
 
 瀑布流参考：
 http://www.cnblogs.com/leolai/archive/2013/04/23/3038159.html
+https://github.com/iMuFeng/Waterfall
+https://github.com/yangkaituo/jquery-waterfall-plugin
 http://ued.taobao.com/blog/2011/09/waterfall/
+
+干货:
+http://www.niumowang.org/html-css/jquery-scroll-theorem/
+http://www.niumowang.org/javascript/jquery-infinite-scroll/
+http://www.infinite-scroll.com/
 
 
 参考架构：  

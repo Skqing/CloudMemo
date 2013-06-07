@@ -45,7 +45,8 @@ exports.write = function (req, res, next) {
  * @param next
  */
 exports.add = function (req, res, next) {
-    var text = req.body.memotext;  //要防止攻击
+    var title = req.body.title;
+    var text = req.body.text;  //要防止攻击
 
     if (text) {
         res.contentType('json');
@@ -54,13 +55,18 @@ exports.add = function (req, res, next) {
     }
 
     var memo = new Memo();
+    memo.title = title;
     memo.context = text;
     memo.create_at = new Date();
-    memo.create_by = req.session.userid;
+//    memo.create_by = req.session.userid;
+    memo.create_by = 1111;
 
-    console.log(text);
-    var msg = {status: 'success', info: '新增成功!', data: memo};
-    res.send(msg);
+    memo.save(function (err) {
+        if (err) return next(err);
+        console.log('---新增便签成功！--');
+        var msg = {status: 'success', info: '新增便签成功!'};
+        res.send(msg);
+    });
 }
 
 /**
@@ -156,16 +162,46 @@ exports.count = function(req, res, next) {
  * @param next
  */
 exports.waterfall = function(req, res, next) {
-    Memo.find({create_at: {$gte: begindate, $lte: enddate}}, function (err, memos) {
+    console.log('------瀑布流加载-----');
+    var page = req.body.tid;
+    var begindate = req.body.begindate;
+    var enddate = req.body.enddate;
+
+    // 分页,按时间排序
+    var suminpage = 20;
+    var count = Memo.count();
+    var query = Memo.find({});
+    if (begindate) {
+        query.where({create_at: { $gte: begindate }});
+    }
+    if (enddate) {
+        query.where({create_at: { $lte: enddate }});
+    }
+    query.limit(20);
+    query.skip(20*page);
+
+    query.exec(function (err, memos) {
         if (err) {
             return next(err);
         }
         if (!memos) {
-            res.contentType('json');  //返回的数据类型
-            res.send(JSON.stringify({ status: "success", message: '获取便签综述成功！', data: memos }));  //给客户端返回一个json格式的数据
-            res.end();
+//            var msg = { status: "success", message: '获取便签成功！', data: memos };
+//            console.log(msg);
+            console.log(memos);
+            res.send(memos);  //给客户端返回一个json格式的数据
         }
     });
+    return true;
+
+//    Memo.find({create_at: {$gte: begindate, $lte: enddate}}, function (err, memos) {
+//        if (err) {
+//            return next(err);
+//        }
+//        if (!memos) {
+//            var msg = { status: "success", message: '获取便签成功！', data: memos };
+//            res.send(msg);  //给客户端返回一个json格式的数据
+//        }
+//    });
 }
 
 /**

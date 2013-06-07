@@ -11,10 +11,11 @@ var Schema = mongoose.Schema;
 var ObjectId = Schema.ObjectId;
 
 var MemoSchema = new Schema({
-  context: { type: String, unique: true },
+  title : { type: String },
+  context: { type: String },
 
   create_at: { type: Date, default: Date.now },
-  create_by: { type: ObjectId }
+  create_by: { type: String }
 
 //  update_at: { type: Date, default: Date.now },
 //  update_by: { type: ObjectId }

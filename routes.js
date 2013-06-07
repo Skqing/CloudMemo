@@ -25,5 +25,7 @@ module.exports = function (app) {
     app.post('/signup/resetpwd', sign.resetpwd);
 
     app.post('/memo/write', memo.write);
+    app.post('/memo/add', memo.add);
+    app.get('/memo/waterfall', memo.waterfall);
 
 }

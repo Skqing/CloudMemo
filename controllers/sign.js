@@ -34,11 +34,11 @@ exports.login = function (req, res, next) {
     var pass = req.body.password;
 
     if (!email) {
-        var msg = {status: 'failure', field: 'email,', info: '邮箱不能为空!', data: ''};
+        var msg = {status: 'failure', field: 'email,', info: '邮箱不能为空!'};
         res.send(msg);
     }
     if (!pass) {
-        var msg = {status: 'failure', field: 'password', info: '密码不能为空!', data: ''};
+        var msg = {status: 'failure', field: 'password', info: '密码不能为空!'};
         res.send(msg);
     }
     email = sanitize(email).trim().toLowerCase();
@@ -49,18 +49,18 @@ exports.login = function (req, res, next) {
             return next(err);
         }
         if (!user) {
-            var msg = {status: 'failure', field: '', info: '这个用户不存在!', data: ''};
+            var msg = {status: 'failure', info: '这个用户不存在!'};
             res.send(msg);
         }
         pass = security.md5(pass);
         if (pass !== user.password) {
-            var msg = {status: 'failure', field: 'password', info: '密码错误!', data: ''};
+            var msg = {status: 'failure', field: 'password', info: '密码错误!'};
             res.send(msg);
         }
         // store session cookie
         gen_session(user, res);
 
-        var msg = {status: 'success', field: '', info: '登录成功!', data: ''};
+        var msg = {status: 'success', info: '登录成功!'};
         res.send(msg);
     });
 }
@@ -82,13 +82,9 @@ exports.signup = function (req, res, next) {
 //  name = sanitize(name).xss();
 //  var username = name.toLowerCase();
     console.log('------用户注册-----');
-    var email = sanitize(req.body.email).trim();
-    email = email.toLowerCase();
-    email = sanitize(email).xss();
-    var pass = sanitize(req.body.password).trim();
-    pass = sanitize(pass).xss();
-    var re_pass = sanitize(req.body.re_pwd).trim();
-    re_pass = sanitize(re_pass).xss();
+    var email = req.body.email;
+    var pass = req.body.password;
+    var re_pass = req.body.re_pwd;
 
     if (!email) {
         var msg = {status: 'failure', field: 'email,', info: '邮箱不能为空!', data: ''};
@@ -112,6 +108,15 @@ exports.signup = function (req, res, next) {
         var msg = {status: 'failure', field: 're_pwd', info: '两次密码输入不一致!', data: ''};
         res.send(msg);
     }
+
+    email = sanitize(email).trim().toLowerCase();
+    email = sanitize(email).xss();
+
+    pass = sanitize(pass).trim();
+    pass = sanitize(pass).xss();
+
+    re_pass = sanitize(re_pass).trim();
+    re_pass = sanitize(re_pass).xss();
 
     User.findOne({'email': email}, function (err, user) {
         if (err) {
