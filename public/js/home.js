@@ -68,6 +68,33 @@ $(function () {
     }
 
 
+    $('#waterfall').infinitescroll({
+        navSelector: "div.navigation", // 导航的选择器，会被隐藏
+        nextSelector: "div.navigation a:first", // 包含下一页链接的选择器
+        itemSelector: "#content div.post", // 你将要取回的选项(内容块)
+        debug: true, // 启用调试信息
+        loadingImg: "/img/loading.gif", //加载的时候显示的图片
+        //默认采用："http://www.infinite-scroll.com/loading.gif"
+        loadingText: "正在给力载入中...", //加载的时候显示的文字
+        // 默认显示： "<em>Loading the next set of posts...</em>"
+        animate: true, //当有新数据加载进来的时候，页面是否有动画效果，默认没有
+        extraScrollPx: 50, //滚动条距离底部多少像素的时候开始加载，默认150
+        donetext: "客官已经结束了...", //数据加载完的时候显示的信息
+        // 默认显示： "<em>Congratulations, you've reached the end of the internet.</em>"
+        bufferPx: 40, //载入信息的显示时间，时间越大，载入信息显示时间越短
+        errorCallback: function () {
+        }, //当出错的时候，比如404页面的时候执行的函数
+        localMode: true //是否允许载入具有相同函数的页面，默认为false
+    }, function (arrayOfNewElems) { //程序执行完的回调函数
+
+        // optional callback when new content is successfully loaded in.
+
+        // keyword `this` will refer to the new DOM content that was just added.
+        // as of 1.5, `this` matches the element you called the plugin on (e.g. #content)
+        //                   all the new elements that were found are passed in as an array
+
+    });
+
     /*** waterfall ***/
     // 按需加载方式
 //    var page = 1;
