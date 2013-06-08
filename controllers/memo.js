@@ -163,7 +163,7 @@ exports.count = function(req, res, next) {
  */
 exports.waterfall = function(req, res, next) {
     console.log('------瀑布流加载-----');
-    var page = req.body.tid;
+    var page = req.body.page;
     var begindate = req.body.begindate;
     var enddate = req.body.enddate;
 

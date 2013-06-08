@@ -72,8 +72,7 @@
 							});
 						},
 			// 生成html字符串函数
-			createHtml = $.isFunction(opts.createHtml) ?　
-					opts.createHtml　:
+			createHtml = $.isFunction(opts.createHtml) ? opts.createHtml :
 					function(data){
 						return '<div class="wf_item_inner">' +
 								  '<a href="'+ data.href +'" class="thumb" target="_blank">' +
