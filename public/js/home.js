@@ -106,7 +106,7 @@ $(function () {
 //                url: '/memo/waterfall?callback=?',
 //                cache: false,
 //                data: {page: ++page},
-//                dataType:'jsonp',
+//                dataType:'json',
 //                timeout: 60000,
 //                success: success,
 //                error: error

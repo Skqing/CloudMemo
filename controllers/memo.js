@@ -187,8 +187,9 @@ exports.waterfall = function(req, res, next) {
         if (!memos) {
 //            var msg = { status: "success", message: '获取便签成功！', data: memos };
 //            console.log(msg);
-            console.log(memos);
-            res.send(memos);  //给客户端返回一个json格式的数据
+			var str = '['+JSON.stringify(memos)+']';
+            console.log(str);
+            res.send(str);  //给客户端返回一个json数组的数据
         }
     });
     return true;
