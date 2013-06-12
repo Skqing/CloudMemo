@@ -4,8 +4,10 @@
  * Email: dolphinboyo@gmail.com
  * Date: 13-5-9
  * Time: 下午8:08
- * Description: for home page
+ * Description: for about page
  */
+
+
 
 h2, p {
     font-size: 100%;
@@ -22,7 +24,7 @@ ul li {
     float: left;
 }
 
-ul li a {
+ul li div {
     text-decoration: none;
     color: #000;
     background: #ffc;
@@ -47,26 +49,12 @@ ul li h2 {
 }
 
 ul li p {
-    /*font-family: "Reenie Beanie" ,arial,sans-serif,"微软雅黑";*/
-    font-family: "SourceCodePro-Light", arial, sans-serif, "微软雅黑";
+    font-family: "Reenie Beanie" ,arial,sans-serif,"微软雅黑";
+    /*font-family: "SourceCodePro-Light", arial, sans-serif, "微软雅黑";*/
     font-size: 110%;
 }
 
-ul li:first-child a {
-    height: 12em;
-    width: 10em;
-
-    -moz-box-shadow: 10px 10px 7px rgba(0, 0, 0, .7);
-    -webkit-box-shadow: 10px 10px 7px rgba(0, 0, 0, .7);
-    box-shadow: 10px 10px 7px rgba(0, 0, 0, .7);
-    -webkit-transform: scale(1.25);
-    -moz-transform: scale(1.25);
-    -o-transform: scale(1.25);
-    position: relative;
-    z-index: 5;
-}
-
-ul li:nth-child(even) a {
+ul li:nth-child(even) div {
     -o-transform: rotate(4deg);
     -webkit-transform: rotate(4deg);
     -moz-transform: rotate(4deg);
@@ -80,7 +68,7 @@ ul li:nth-child(even) a {
     background: #cfc;
 }
 
-ul li:nth-child(3n) a {
+ul li:nth-child(3n) div {
     -o-transform: rotate(-3deg);
     -webkit-transform: rotate(-3deg);
     -moz-transform: rotate(-3deg);
@@ -94,7 +82,7 @@ ul li:nth-child(3n) a {
     background: #ccf;
 }
 
-ul li:nth-child(5n) a {
+ul li:nth-child(5n) div {
     -o-transform: rotate(5deg);
     -webkit-transform: rotate(5deg);
     -moz-transform: rotate(5deg);
@@ -102,7 +90,7 @@ ul li:nth-child(5n) a {
     top: -10px;
 }
 
-ul li a:hover, ul li a:focus {
+ul li div:hover, ul li div:focus {
     -moz-box-shadow: 10px 10px 7px rgba(0, 0, 0, .7);
     -webkit-box-shadow: 10px 10px 7px rgba(0, 0, 0, .7);
     box-shadow: 10px 10px 7px rgba(0, 0, 0, .7);
@@ -113,47 +101,6 @@ ul li a:hover, ul li a:focus {
     z-index: 5;
 }
 
-.close {
-    display: none;
-    float: right;
-    width: 10px;
-    height: 12px;
-    padding: 0px;
-    cursor: pointer;
-    background-image: url(/images/icenter_lite.png);
-    background-position: -640px -15px;
+ul li p a {
+    color: #E50053;
 }
-
-textarea, input {
-    border: 2px solid #2ECC71;
-    color: #2ECC71;
-    font-family: "Lato", sans-serif;
-
-    -webkit-appearance: none;
-    -webkit-border-radius: 6px;
-    -moz-border-radius: 6px;
-    border-radius: 6px;
-    -webkit-box-shadow: none;
-    -moz-box-shadow: none;
-    box-shadow: none;
-
-}
-
-input {
-    margin-bottom: 1px;
-}
-
-.button {
-    color: white;
-}
-
-.button span {
-    background-color: #16A085;
-    padding-left: 10px;
-    padding-right: 10px;
-}
-
-.button span:first-child {
-    margin-right: 55px;
-}
-

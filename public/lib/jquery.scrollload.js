@@ -62,52 +62,46 @@
             }
             if(!isLoading){ // 确保上一次加载完毕才发送新的请求
                 // 滚动条下拉时判断是否需要向服务器请求数据或者是处理缓存数据
-                if(colsHeight.minHeight + wf_col_top < $(window).height() + $(window).scrollTop()){
-                    // 如果缓存还有数据，直接处理数据
-                    if(jsonCache.length > 0){
-                        dealData();
-                    }else{
-                        if(opts.ajaxTimes === 'infinite' || ajaxTimes < opts.ajaxTimes){
-                            showMsg('loading');
-                            // 传参给服务器
-                            opts.params.ajax = ++ajaxTimes;
-                            ajaxFunc(
-                                function(jsonData){
-                                    try{
-                                        if(jsonData.length > 0){
-                                            jsonCache = jsonCache.concat(jsonData).reverse();
-                                            dealData();
-                                        }else{
-                                            showMsg('finish');
-                                        }
-                                    }
-                                    catch(e){
-                                        showMsg('error');
-                                    }
-                                },
-                                function(){
-                                    showMsg('error');
+                if(opts.ajaxTimes === 'infinite' || ajaxTimes < opts.ajaxTimes){
+                    showMsg('loading');
+                    // 传参给服务器
+                    opts.params.ajax = ++ajaxTimes;
+                    ajaxFunc(
+                        function(jsonData){
+                            try{
+                                if(jsonData.length > 0){
+                                    jsonCache = jsonCache.concat(jsonData).reverse();
+                                    dealData();
+                                }else{
+                                    showMsg('finish');
                                 }
-                            );
-
-                        }else{
-                            showMsg('finish');
+                            }
+                            catch(e){
+                                showMsg('error');
+                            }
+                        },
+                        function(){
+                            showMsg('error');
                         }
-                    }
+                    );
 
                 }else{
-                    isScroll = true;
+                    showMsg('finish');
                 }
             }
         }
 
         // 处理返回的数据
         function dealData(){
+            console.log('处理数据.');
+            console.log(jsonCache);
             var colNum = typeof opts.perNum === 'number' ? opts.perNum : opts.colNum,
                 data = null,
                 wf_col_height = $wf_col.height(),
                 $wf_item, $wf_img, htmlStr;
+                data = jsonCache.pop();
 
+                htmlStr = createHtml(data);
 
 
 
@@ -127,18 +121,31 @@
             switch(type){
                 case 'loading':
                     isLoading = true;
-                    $wf_result.html('').addClass('wf_loading').show();
+//                    $wf_result.html('').addClass('wf_loading').show();
                     break;
                 case 'error':
-                    $wf_result.removeClass('wf_loading').show().html('服务器返回数据格式错误！');
+//                    $wf_result.removeClass('wf_loading').show().html('服务器返回数据格式错误！');
                     isFinish =  true;
                     break;
                 case 'finish':
-                    $wf_result.removeClass('wf_loading').show().html('已加载完毕，没有更多了！');
+//                    $wf_result.removeClass('wf_loading').show().html('已加载完毕，没有更多了！');
                     isFinish = true;
                     break;
             }
         }
+
+        return this.each(function () {
+            // 第一次拉取图片时，保证图片能填满窗出现滚动
+            getJSONData();
+
+            // 注册滚动条事件
+            $(window).bind('scroll',function () {
+                if ($(document).scrollTop() + $(window).height() > $(document).height() - 20) {
+                    console.log('滚轮已经到达指定位置，再次请求数据!');
+                    getJSONData();
+                }
+            });
+        });;
     };
 
     // 默认配置

@@ -6,6 +6,7 @@
  * Description: 安全方面的工具，例如MD5
  */
 var crypto = require('crypto');
+var xss = require('xss');
 
 module.exports.encrypt = function(str, secret) {
   var cipher = crypto.createCipher('aes192', secret);
@@ -39,3 +40,57 @@ module.exports.randomString = function (size) {
   }
   return new_pass;
 }
+
+/**
+ * Escape the given string of `html`.
+ *
+ * @param {String} html
+ * @return {String}
+ * @api private
+ */
+
+exports.escape = function (html) {
+    var codeSpan = /(^|[^\\])(`+)([^\r]*?[^`])\2(?!`)/gm;
+    var codeBlock = /(?:\n\n|^)((?:(?:[ ]{4}|\t).*\n+)+)(\n*[ ]{0,3}[^ \t\n]|(?=~0))/g;
+    var spans = [];
+    var blocks = [];
+    var text = String(html).replace(/\r\n/g, '\n')
+        .replace('/\r/g', '\n');
+
+    text = '\n\n' + text + '\n\n';
+
+    text = text.replace(codeSpan, function (code) {
+        spans.push(code);
+        return '`span`';
+    });
+
+    text += '~0';
+
+    return text.replace(codeBlock, function (whole, code, nextChar) {
+        blocks.push(code);
+        return '\n\tblock' + nextChar;
+    })
+        .replace(/&(?!\w+;)/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/`span`/g, function () {
+            return spans.shift();
+        })
+        .replace(/\n\tblock/g, function () {
+            return blocks.shift();
+        })
+        .replace(/~0$/, '')
+        .replace(/^\n\n/, '')
+        .replace(/\n\n$/, '');
+};
+
+/**
+ * 过滤XSS攻击代码
+ *
+ * @param {string} html
+ * @return {string}
+ */
+exports.xss = function (html) {
+    return xss(html);
+};

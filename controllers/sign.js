@@ -12,7 +12,7 @@ var check = require('validator').check,
     sanitize = require('validator').sanitize;
 
 var config = require('../config');
-var security = require('../utils/security_utils');
+var Security = require('../utils/security_utils');
 
 
 //login
@@ -52,7 +52,7 @@ exports.login = function (req, res, next) {
             var msg = {status: 'failure', info: '这个用户不存在!'};
             res.send(msg);
         }
-        pass = security.md5(pass);
+        pass = Security.md5(pass);
         if (pass !== user.password) {
             var msg = {status: 'failure', field: 'password', info: '密码错误!'};
             res.send(msg);
@@ -128,9 +128,9 @@ exports.signup = function (req, res, next) {
         }
 
         // md5 the pass
-        pass = security.md5(pass);
+        pass = Security.md5(pass);
         // create gavatar
-        var avatar_url = 'http://www.gravatar.com/avatar/' + security.md5(email.toLowerCase()) + '?size=48';
+        var avatar_url = 'http://www.gravatar.com/avatar/' + Security.md5(email.toLowerCase()) + '?size=48';
 
         var user = new User();
         var name = email.split('@')[0];
@@ -147,6 +147,11 @@ exports.signup = function (req, res, next) {
     });
 };
 
+exports.logout = function (req, res, next) {
+    req.session.destroy();
+    res.clearCookie(config.auth_cookie_name, { path: '/' });
+    res.redirect(req.headers.referer || 'index');
+}
 /**
  * 重设密码
  * @param req
@@ -167,6 +172,6 @@ exports.resetpwd = function (req, res, next) {
 
 // private
 function gen_session(user, res) {
-    var auth_token = security.encrypt(user._id + '\t' + user.username + '\t' + user.password + '\t' + user.email, config.cookie_secret);
+    var auth_token = Security.encrypt(user._id + '\t' + user.username + '\t' + user.password + '\t' + user.email, config.session_secret);
     res.cookie(config.auth_cookie_name, auth_token, {path: '/', maxAge: 1000 * 60 * 60 * 24 * 30}); //cookie 有效期30天
 }

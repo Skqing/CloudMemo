@@ -1,5 +1,5 @@
 
-function getBingBackground(url, ) {  //获取bing每日首页背景图片
+function getBingBackground(url) {  //获取bing每日首页背景图片
 	url = url || "http://bing.com";
 	var html = '';
 	// 1.取得首页的html内容

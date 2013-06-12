@@ -44,6 +44,9 @@ https://github.com/yangkaituo/jquery-waterfall-plugin
 http://ued.taobao.com/blog/2011/09/waterfall/
 
 干货:
+http://www.niumowang.org/javascript/more-jquery-scroll-plugin/
+
+http://jasonlau.biz/home/jquery/screw-a-jquery-plugin
 http://www.niumowang.org/html-css/jquery-scroll-theorem/  
 
 http://www.niumowang.org/javascript/jquery-infinite-scroll/

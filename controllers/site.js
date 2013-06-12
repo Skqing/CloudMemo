@@ -10,6 +10,11 @@ exports.index = function(req, res, next) {
 
   res.render('index');
 }
+exports.about = function(req, res, next) {
+    res.render('about');
+}
+
+
 
 exports.home = function(req, res, next) {
 

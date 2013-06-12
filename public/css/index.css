@@ -6,7 +6,13 @@
  * Time: 下午9:59
  * Description: 首页样式
  */
-
+@font-face {
+    font-family: 'Flat-UI-Icons';
+    src: url('./fonts/Flat-UI-Icons.eot');
+    src: url('./fonts/Flat-UI-Icons.eot?#iefix') format('embedded-opentype'), url('./fonts/Flat-UI-Icons.woff') format('woff'), url('./fonts/Flat-UI-Icons.ttf') format('truetype'), url('./fonts/Flat-UI-Icons.svg#Flat-UI-Icons') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
 
 body {
     background: url("/images/bg.png") no-repeat;
@@ -43,7 +49,7 @@ body, textarea, select, input, button {
 
 .slogan {
     width: 450px;
-    color: white;
+    color: #A13FB9;
     font-size: 22px;
     letter-spacing: 22px;
 }

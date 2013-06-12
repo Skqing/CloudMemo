@@ -45,28 +45,40 @@ exports.write = function (req, res, next) {
  * @param next
  */
 exports.add = function (req, res, next) {
-    var title = req.body.title;
-    var text = req.body.text;  //要防止攻击
+    var method = req.method;
+    if (method.toLowerCase() == 'post') {
+        var title = req.body.title;
+        var text = req.body.text;  //要防止攻击
 
-    if (text) {
-        res.contentType('json');
-        res.send(JSON.stringify({ status: "failure", message: '参数获取失败!' }));
-        res.end();
+        if (!title || !text ) {
+            var msg = { status: "failure", info: '参数获取失败!' };
+            res.send(msg);
+        }
+        title = sanitize(title).xss();
+        text = sanitize(text).xss();
+
+        var memo = new Memo();
+        memo.title = title;
+        memo.context = text;
+        memo.create_at = new Date();
+//    memo.create_by = req.session.userid;
+        memo.create_by = 1111;
+
+        memo.save(function (err) {
+            if (err) return next(err);
+            Memo.findOne(memo, function(err, memo) {
+                if (err) return next(err);
+
+                var msg = { status: 'success', info: '新增便签成功!', data: memo };
+                console.log(msg);
+                res.send(msg);
+            });
+        });
+    } else {
+        var msg = { status: 'failure', info: '非法请求!' };
+        res.send(msg);
     }
 
-    var memo = new Memo();
-    memo.title = title;
-    memo.context = text;
-    memo.create_at = new Date();
-//    memo.create_by = req.session.userid;
-    memo.create_by = 1111;
-
-    memo.save(function (err) {
-        if (err) return next(err);
-        console.log('---新增便签成功！--');
-        var msg = {status: 'success', info: '新增便签成功!'};
-        res.send(msg);
-    });
 }
 
 /**
@@ -114,12 +126,12 @@ exports.update = function (req, res, next) {
  * @param next
  */
 exports.delete = function (req, res, next) {
-    var tid = req.body.tid;
+    var tid = req.query.tid;
+    console.log('---删除文档, ID: %s --', tid);
 
-    if (tid) {
-        res.contentType('json');  //返回的数据类型
-        res.send(JSON.stringify({ status: "failure", message: '参数获取失败!' }));
-        res.end();
+    if (!tid) {
+        var msg = { status: "failure", message: '参数获取失败!' };
+        res.send(msg);
     }
 
     Memo.findByIdAndRemove(tid, function (err, memo) {
@@ -128,13 +140,13 @@ exports.delete = function (req, res, next) {
         }
         if (!memo) {
             res.contentType('json');  //返回的数据类型
-            var msg = { status: 'failure', info: '便签数据丢失或者不存在，请刷新之后重试!', data: '' };
+            var msg = { status: 'failure', info: '便签数据丢失或者不存在，请刷新之后重试!' };
             res.send(msg);  //给客户端返回一个json格式的数据
         }
     });
-    var msg = { status: 'success', info: '删除成功!', data: '' };
+    var msg = { status: 'success', info: '删除成功!' };
+    console.log('---删除成功!--');
     res.send(msg);
-    console.log('---删除成功！--');
 }
 
 /**
@@ -155,6 +167,25 @@ exports.count = function(req, res, next) {
     });
 }
 
+exports.loadAll = function(req, res, next) {
+    console.log('------加载所有数据-----');
+    var query = Memo.find({});
+    query.sort('-create_at');
+    query.exec(function (err, memos) {
+        if (err) {
+            return next(err);
+        }
+        if (memos) {
+            var msg = { status: "success", message: '获取便签成功！', data: memos };
+            console.log(msg);
+            res.send(msg);  //给客户端返回一个json数组的数据
+        } else {
+            console.log('木有数据啦！');
+            var msg = { status: "success", message: '木有数据啦!' };
+            res.send(msg);
+        }
+    });
+}
 /**
  * 便签首页用瀑布流加载
  * @param req
@@ -163,75 +194,67 @@ exports.count = function(req, res, next) {
  */
 exports.waterfall = function(req, res, next) {
     console.log('------瀑布流加载-----');
-    var page = req.body.page;
-    var begindate = req.body.begindate;
-    var enddate = req.body.enddate;
+    var page = req.query.page;
+    var begindate = req.query.begindate;
+    var enddate = req.query.enddate;
+    console.log('page no: %d:', page);
+
+//    for (var i=0; i<100; i++) {
+//        var memo = new Memo();
+//        memo.title = '测试'+(i++);
+//        memo.context = (i++)+'测试数据----URL：putty 也就是刚才导出来得私钥。';
+//        memo.create_at = new Date();
+//        memo.create_by = 1111;
+//
+//        memo.save(function (err) {
+//            if (err) return next(err);
+//            console.log(memo.title);
+//        });
+//    }
+
+
 
     // 分页,按时间排序
-    var suminpage = 20;
-    var count = Memo.count();
-    var query = Memo.find({});
-    if (begindate) {
-        query.where({create_at: { $gte: begindate }});
-    }
-    if (enddate) {
-        query.where({create_at: { $lte: enddate }});
-    }
-    query.limit(20);
-    query.skip(20*page);
-
-    query.exec(function (err, memos) {
+    var suminpage = 10;
+    Memo.count({}, function(err, count) {
         if (err) {
             return next(err);
         }
-        if (!memos) {
-//            var msg = { status: "success", message: '获取便签成功！', data: memos };
-//            console.log(msg);
-			var str = '['+JSON.stringify(memos)+']';
-            console.log(str);
-            res.send(str);  //给客户端返回一个json数组的数据
-        }
-    });
-    return true;
+        console.log('查询到 %d 条数据!', count);
 
-//    Memo.find({create_at: {$gte: begindate, $lte: enddate}}, function (err, memos) {
-//        if (err) {
-//            return next(err);
-//        }
-//        if (!memos) {
-//            var msg = { status: "success", message: '获取便签成功！', data: memos };
-//            res.send(msg);  //给客户端返回一个json格式的数据
-//        }
-//    });
-}
+        page = page ? page : page < 1 ? 1 : page;
 
-/**
- * 根据日期查询
- * @param req
- * @param res
- * @param next
- */
-exports.findByDate = function(req, res, next) {  //应该考虑分页
-    var begindate = req.body.begindate;
-    var enddate = req.body.enddate;
+        if (count < suminpage*page) {
+            console.log('木有数据啦！');
+            return true;
+        } else {
+            var query = Memo.find({});
+            if (begindate) {
+                console.log('begindate:'+begindate);
+                query.where({create_at: { $gte: begindate }});
+            }
+            if (enddate) {
+                console.log('enddate:'+enddate);
+                query.where({create_at: { $lte: enddate }});
+            }
+            query.limit(suminpage);
+            query.skip(suminpage*page);
 
-    if (!begindate) {
-        res.contentType('json');
-        res.send(JSON.stringify({ status: "failure", message: '请选择开始日期!' }));
-        res.end();
-    }
-    if (!enddate) {
-        enddate = Date.now();
-    }
+            query.sort('-create_at');
 
-    Memo.find({create_at: {$gte: begindate, $lte: enddate}}, function (err, memos) {
-        if (err) {
-            return next(err);
-        }
-        if (!memos) {
-            res.contentType('json');  //返回的数据类型
-            res.send(JSON.stringify({ status: "success", message: '获取便签综述成功！', data: memos }));  //给客户端返回一个json格式的数据
-            res.end();
+            query.exec(function (err, memos) {
+                if (err) {
+                    return next(err);
+                }
+                if (memos) {
+                    var msg = { status: "success", message: '获取便签成功！', data: memos };
+                    res.send(msg);  //给客户端返回一个json数组的数据
+                } else {
+                    console.log('木有数据啦！');
+                    var msg = { status: "success", message: '木有数据啦!' };
+                    res.send(msg);
+                }
+            });
         }
     });
 }

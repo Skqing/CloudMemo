@@ -39,7 +39,6 @@ module.exports = {
   user_session_key : 'user_session_key',  //用户session标识
   loginrefer_session_key: 'loginrefer_session_key',
 
-  cookie_secret : 'cloudmemo',
   session_secret: 'cloudmemo',
   auth_cookie_name: 'cloudmemo',
   redirect_uri : 'index',  //跳转地址,用户登录后转到之前请求的地址

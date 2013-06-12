@@ -2,237 +2,52 @@
 <html>
 <head>
     <title>主页 | 云袖便签</title>
-	<link href="http://fonts.googleapis.com/css?family=Reenie+Beanie:regular" rel="stylesheet" type="text/css">
+    <link href="/css/common.css" rel="stylesheet"/>
+    <link href="/css/home.css" rel="stylesheet"/>
     <script type="text/javascript" src="/lib/jquery-2.0.0.min.js"></script>
     <script type="text/javascript" src="/lib/jquery.cookie.js"></script>
-    <script type="text/javascript" src="/lib/jquery.waterfall.js"></script>
+    <!--<script type="text/javascript" src="/lib/jquery.scrollload.js"></script>-->
+    <!--<script type="text/javascript" src="/lib/jquery.waterfall.js"></script>-->
     <!--<script type="text/javascript" src="/lib/jquery.waterfall.min.js"></script>-->
-	<!--<script type="text/javascript" src="/plugs/infinite-scroll/jquery.infinitescroll.min.js"></script>-->
+    <!--<script type="text/javascript" src="/plugs/infinite-scroll/jquery.infinitescroll.min.js"></script>-->
 
     <script type="text/javascript" src="/js/home.js"></script>
 
-	<style type="text/css">
-        @font-face {
-            font-family: 'SourceCodePro-Light';
-            src: url('./css/fonts/SourceCodePro-Light.eot');
-            src: url('./css/fonts/SourceCodePro-Light.eot?#iefix') format('embedded-opentype'), url('./css/fonts/SourceCodePro-Light.woff') format('woff'), url('./css/fonts/SourceCodePro-Light.ttf') format('truetype'), url('./css/fonts/SourceCodePro-Light.svg#Flat-UI-Icons') format('svg');
-            font-weight: normal;
-            font-style: normal;
-        }
-
-        *{
-          margin:0;
-          padding:0;
-        }
-        body{
-          font-family:arial,sans-serif;
-          font-size:100%;
-          margin:3em;
-          background:#D6DBDF;
-          color:#fff;
-        }
-        h2,p {
-          font-size:100%;
-          font-weight:normal;
-        }
-        ul,li {
-          list-style:none;
-        }
-        ul {
-          overflow:hidden;
-          padding:3em;
-        }
-        ul li a {
-            text-decoration: none;
-            color: #000;
-            background: #ffc;
-            display: block;
-            height: 10em;
-            width: 10em;
-            padding: 1em; /* Firefox */
-            -moz-box-shadow: 5px 5px 7px rgba(33,33,33,1); /* Safari+Chrome */
-            -webkit-box-shadow: 5px 5px 7px rgba(33,33,33,.7); /* Opera */
-            box-shadow: 5px 5px 7px rgba(33,33,33,.7);
-
-            -moz-transition:-moz-transform .15s linear;
-            -o-transition:-o-transform .15s linear;
-            -webkit-transition:-webkit-transform .15s linear;
-        }
-        ul li{
-            margin:1em;
-            float:left;
-        }
-
-        ul li h2
-        {
-            font-size: 140%;
-            font-weight: bold;
-            padding-bottom: 10px;
-        }
-        ul li p
-        {
-            /*font-family: "Reenie Beanie" ,arial,sans-serif,"微软雅黑";*/
-            font-family: "SourceCodePro-Light" ,arial,sans-serif,"微软雅黑";
-            font-size: 110%;
-        }
-
-        ul li:first-child a {
-            height: 12em;
-            width: 10em;
-
-            -moz-box-shadow:10px 10px 7px rgba(0,0,0,.7);
-            -webkit-box-shadow: 10px 10px 7px rgba(0,0,0,.7);
-            box-shadow:10px 10px 7px rgba(0,0,0,.7);
-            -webkit-transform: scale(1.25);
-            -moz-transform: scale(1.25);
-            -o-transform: scale(1.25);
-            position:relative;
-            z-index:5;
-        }
-
-        ul li:nth-child(even) a {
-          -o-transform:rotate(4deg);
-          -webkit-transform:rotate(4deg);
-          -moz-transform:rotate(4deg);
-          position:relative;
-          top:5px;
-          -o-transform:rotate(4deg);
-          -webkit-transform:rotate(4deg);
-          -moz-transform:rotate(4deg);
-          position:relative;
-          top:5px;
-          background:#cfc;
-        }
-        ul li:nth-child(3n) a {
-          -o-transform:rotate(-3deg);
-          -webkit-transform:rotate(-3deg);
-          -moz-transform:rotate(-3deg);
-          position:relative;
-          top:-5px;
-          -o-transform:rotate(-3deg);
-          -webkit-transform:rotate(-3deg);
-          -moz-transform:rotate(-3deg);
-          position:relative;
-          top:-5px;
-          background:#ccf;
-        }
-        ul li:nth-child(5n) a {
-          -o-transform:rotate(5deg);
-          -webkit-transform:rotate(5deg);
-          -moz-transform:rotate(5deg);
-          position:relative;
-          top:-10px;
-        }
-
-        ul li a:hover,ul li a:focus {
-          -moz-box-shadow:10px 10px 7px rgba(0,0,0,.7);
-          -webkit-box-shadow: 10px 10px 7px rgba(0,0,0,.7);
-          box-shadow:10px 10px 7px rgba(0,0,0,.7);
-          -webkit-transform: scale(1.25);
-          -moz-transform: scale(1.25);
-          -o-transform: scale(1.25);
-          position:relative;
-          z-index:5;
-        }
-
-        .button {
-            color: white;
-        }
-        .button span {
-            background-color: #16A085;
-            padding-left: 10px;
-            padding-right: 10px;
-        }
-    </style>
 </head>
 <body>
-    <div id="container">
-        <div id="top">
+<div id="container">
+    <div class="top alpha">
+        <div class="topBox">
+            <div class="pNav">
+                <a href="/home" title="首页" class="pbg navHome"></a>
+                <!--
+                <a href="/history" title="记录" class="pbg navRecord"></a>
+                <a href="/message" title="消息" class="pbg navMsg"></a>
+                <a href="/setting" title="设置" class="pbg navSet"></a>
+                -->
+                <a href="/about" title="关于" class="pbg navAbout"></a>
+                <a href="/sign/logout" title="退出" class="pbg navLogout"></a>
+            </div>
         </div>
-        <div id="memolist">
-			<ul id="waterfall">
-				<li id="context"><a href="#">
-					<input id="memotitle" type="text" size="10">
-					<textarea id="memotext" cols="20" rows="10" wrap="physical"></textarea>
-                    <div class="button"><span id="clear">清空</span><span id="filling">归档</span></div>
-				</a></li>
-				<li><a href="#">
-					<h2>Dudu：</h2>
-					<p>最近咋没有美女发帖呢？我一定给个头条推荐,recommend!</p>
-				</a></li>
-				<li><a href="#">
-					<h2>汤姆大叔：</h2>
-					<p>Team的一个成员去了Microsoft做SDE3，又得hire new member了</p>
-                    <p>O2DS和我翻译的书是一样，我一定要比他翻得快, 晚上加班翻,fast! fast! fast!</p>
-				</a></li>
-				<li><a href="#">
-					<h2>技术弟弟：</h2>
-					<p>O2DS和我翻译的书是一样，我一定要比他翻得快, 晚上加班翻,fast! fast! fast!</p>
-				</a></li>
-				<li><a href="#">
-					<h2>Artech：</h2>
-					<p>WCF的帖子真是少，看来我得多发点帖子让大家学习呢</p>
-                    <p>O2DS和我翻译的书是一样，我一定要比他翻得快, 晚上加班翻,fast! fast! fast!</p>
-				</a></li>
-				<li><a href="#">
-					<h2>吉日嘎拉：</h2>
-					<p>将权限管理、工作流管理做到我能力的极致，一个人只能做好那么很少的几件事情</p>
-				</a></li>
-				<li><a href="#">
-					<h2>某武林高手：</h2>
-					<p>低于25000块的面试再也不去了，它grandma的</p>
-                    <p>WCF的帖子真是少，看来我得多发点帖子让大家学习呢</p>
-				</a></li>
-                <li><a href="#">
-                    <h2>某武林高手：</h2>
-                    <p>低于25000块的面试再也不去了，它grandma的</p>
-                    <p>WCF的帖子真是少，看来我得多发点帖子让大家学习呢</p>
-                </a></li>
-                <li><a href="#">
-                    <h2>某武林高手：</h2>
-                    <p>WCF的帖子真是少，看来我得多发点帖子让大家学习呢</p>
-                    <p>WCF的帖子真是少，看来我得多发点帖子让大家学习呢</p>
-                </a></li>
-                <li><a href="#">
-                    <h2>某武林高手：</h2>
-                    <p>WCF的帖子真是少，看来我得多发点帖子让大家学习呢</p>
-                    <p>低于25000块的面试再也不去了，它grandma的</p>
-                    <p>WCF的帖子真是少，看来我得多发点帖子让大家学习呢</p>
-                    <p>WCF的帖子真是少，看来我得多发点帖子让大家学习呢</p>
-                    <p>O2DS和我翻译的书是一样，我一定要比他翻得快, 晚上加班翻,fast! fast! fast!</p>
-                </a></li>
-                <li><a href="#">
-                    <h2>某武林高手：</h2>
-                    <p>WCF的帖子真是少，看来我得多发点帖子让大家学习呢</p>
-                    <p>低于25000块的面试再也不去了，它grandma的</p>
-                    <p>WCF的帖子真是少，看来我得多发点帖子让大家学习呢</p>
-                    <p>WCF的帖子真是少，看来我得多发点帖子让大家学习呢</p>
-                </a></li>
-                <li><a href="#">
-                    <h2>某武林高手：</h2>
-                    <p>低于25000块的面试再也不去了，它grandma的</p>
-                    <p>WCF的帖子真是少，看来我得多发点帖子让大家学习呢</p>
-                    <p>WCF的帖子真是少，看来我得多发点帖子让大家学习呢</p>
-                    <p>低于25000块的面试再也不去了，它grandma的</p>
-                    <p>WCF的帖子真是少，看来我得多发点帖子让大家学习呢</p>
-                    <p>WCF的帖子真是少，看来我得多发点帖子让大家学习呢</p>
-                    <p>O2DS和我翻译的书是一样，我一定要比他翻得快, 晚上加班翻,fast! fast! fast!</p>
-                </a></li>
-                <li><a href="#">
-                    <h2>某武林高手：</h2>
-                    <p>低于25000块的面试再也不去了，它grandma的</p>
-                    <p>WCF的帖子真是少，看来我得多发点帖子让大家学习呢</p>
-                    <p>WCF的帖子真是少，看来我得多发点帖子让大家学习呢</p>
-                    <p>WCF的帖子真是少，看来我得多发点帖子让大家学习呢</p>
-                    <p>WCF的帖子真是少，看来我得多发点帖子让大家学习呢</p>
-                    <p>WCF的帖子真是少，看来我得多发点帖子让大家学习呢</p>
-                    <p>WCF的帖子真是少，看来我得多发点帖子让大家学习呢</p>
-                    <p>WCF的帖子真是少，看来我得多发点帖子让大家学习呢</p>
-                    <p>WCF的帖子真是少，看来我得多发点帖子让大家学习呢</p>
-                    <p>WCF的帖子真是少，看来我得多发点帖子让大家学习呢</p>
-                </a></li>
-			</ul>
-		</div>
     </div>
+
+    <div id="memolist">
+        <ul id="waterfall">
+            <li id="context"><a href="javascript:void(0)">
+                <input id="memotitle" type="text" size="18">
+                <textarea id="memotext" cols="20" rows="10" wrap="physical"></textarea>
+                <div class="button"><span id="clear">清空</span><span id="filling">归档</span></div>
+            </a></li>
+            <!--<li><a href="#">
+                <h2>Dudu：</h2>
+                <p>最近咋没有美女发帖呢？我一定给个头条推荐,recommend!</p>
+            </a></li>
+            <li><a href="#"><span class="close"></span>
+                <h2>某武林高手：</h2>
+                <p>WCF的帖子真是少，看来我得多发点帖子让大家学习呢</p>
+            </a><sapn>x</span></li>-->
+        </ul>
+    </div>
+</div>
 </body>
 </html>

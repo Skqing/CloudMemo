@@ -49,7 +49,7 @@ $(function () {
         console.log('请求数据:');
         console.log(form);
         if (repwdbut == 'none') {
-            $.post('/login', form, function (data) {
+            $.post('/sign/login', form, function (data) {
                 console.log('登录返回数据:');
                 console.log(data);
                 if (data) {
@@ -63,7 +63,7 @@ $(function () {
                 }
             }, 'json');
         } else {
-            $.post('/signup', form, function (data) {
+            $.post('/sign/signup', form, function (data) {
                 console.log('注册返回数据:');
                 console.log(data);
                 if (data) {

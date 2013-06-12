@@ -20,7 +20,7 @@ var UserSchema = new Schema({
   avatar: { type: String },
 
   create_at: { type: Date, default: Date.now },
-  update_at: { type: Date, default: Date.now },
+  update_at: { type: Date, default: Date.now }
 });
 
 UserSchema.virtual('avatar_url').get(function () {
