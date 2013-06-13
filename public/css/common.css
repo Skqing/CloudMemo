@@ -9,8 +9,8 @@
 /* font */
 @font-face {
     font-family: 'SourceCodePro-Light';
-    src: url('./fonts/SourceCodePro-Light.ttf');
-    src: url('./fonts/SourceCodePro-Light.ttf') format('truetype');
+    src: url('./fonts/SourceCodePro-Light.otf');
+    src: url('./fonts/SourceCodePro-Light.otf') format('truetype');
     font-weight: normal;
     font-style: normal;
 }

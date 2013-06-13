@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>CSS3制作云图标</title>
+	<style>
+	body {
+		background: #369;
+	}
+	#cloud {
+		width: 350px;
+		height: 120px;
+		background: #fff;
+		background: linear-gradient(top, #fff 5%, #d6f0fd 100%);
+		background: -webkit-linear-gradient(top, #fff 5%, #d6f0fd 100%);
+		background: -moz-linear-gradient(top, #fff 5%, #d6f0fd 100%);
+		background: -ms-linear-gradient(top, #fff 5%, #d6f0fd 100%);
+		background: -o-linear-gradient(top, #fff 5%, #d6f0fd 100%);
+		border-radius: 100px;
+		position: relative;
+		margin: 120px auto 20px;
+	}
+
+	#cloud:after, #cloud:before {
+		content: '';
+		position: absolute;
+		background: #fff;
+		z-index: -1;
+	}
+
+	#cloud:after {
+		width: 100px; height: 100px;
+		top: -50px; left: 50px;
+		border-radius: 100px;
+	}
+
+	#cloud:before {
+		width: 180px; height: 180px;
+		top: -90px; right: 50px;
+		border-radius: 200px;
+	}
+
+	.shadow {
+		width: 350px;
+		position: absolute; bottom: -10px; 
+		background: #000;
+		z-index: -1;
+		box-shadow: 0 0 25px 8px rgba(0, 0, 0, 0.4);
+		-moz-box-shadow: 0 0 25px 8px rgba(0, 0, 0, 0.4);
+		-webkit-box-shadow: 0 0 25px 8px rgba(0, 0, 0, 0.4);
+		border-radius: 50%;
+	}
+	</style>
+</head>
+<body>
+<div id="cloud">
+    <span class="shadow"></span>
+</div>
+
+</body>
+</html>

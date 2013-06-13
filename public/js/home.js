@@ -116,7 +116,6 @@ $(function () {
                                 console.log('删除文档成功!');
                             } else if (json.status = 'failure') {
                                 alert(json.info);
-                                alert(json.info);
                                 if (json.action && json.action == 'login') {
                                     window.location.href = json.url;
                                 }
@@ -139,7 +138,8 @@ $(function () {
     });
 
     // 绑定删除事件
-//    $("#waterfall span.close").on('click', function() {
+//    $("ul#waterfall span.close").on('click', function(e) {
+//        alert();
 //        $that = $(this);
 //        var id = $(this).attr('id');
 //        $.getJSON('/memo/delete', { tid: id }, function(json) {
@@ -149,11 +149,15 @@ $(function () {
 //                    console.log('删除文档成功!');
 //                } else if (json.status = 'failure') {
 //                    alert(json.info);
+//                    if (json.action && json.action == 'login') {
+//                        window.location.href = json.url;
+//                    }
 //                }
 //            } else {
 //                alert('木有获取到数据, 删除失败!');
 //            }
 //        });
+//        e.stopPropagation();  //防止事件冒泡
 //    });
 
 
