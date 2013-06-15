@@ -19,6 +19,9 @@ var UserSchema = new Schema({
   weibo: { type: String },
   avatar: { type: String },
 
+  retrieve_key: { type: String },
+  retrieve_time: { type: Number },
+
   create_at: { type: Date, default: Date.now },
   update_at: { type: Date, default: Date.now }
 });

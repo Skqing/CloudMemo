@@ -35,20 +35,15 @@ $(function () {
 
     //图片切换
 
-
+    $("#sign").data("action", "login");
     //用户登录
     $("#login").click(function () {
-//        var repwdbut = $("#re_pwd");
-//        var repwdhtml = "<div class='control-group'>"
-//            + "<input id='re_pwd' type='password' class='login-field' placeholder='确认密码' />"
-//            + "<label class='login-field-icon fui-lock' for='re_pwd'></label>"
-//            + "</div>";
-//        $(repwdhtml).before( $("div.control-group")[0]);
-        var repwdbut = $("div.repwd").css('display');
+        var action = $("#sign").data("action");
+        console.log('action: %s', action);
         var form = $("#sign").serialize();
         console.log('请求数据:');
         console.log(form);
-        if (repwdbut == 'none') {
+        if (action == 'login') {
             $.post('/sign/login', form, function (data) {
                 console.log('登录返回数据:');
                 console.log(data);
@@ -62,7 +57,7 @@ $(function () {
                     alert('获取数据失败，请重试!');
                 }
             }, 'json');
-        } else {
+        } else if (action == 'signup') {
             $.post('/sign/signup', form, function (data) {
                 console.log('注册返回数据:');
                 console.log(data);
@@ -70,28 +65,49 @@ $(function () {
                     if (data.status == 'success') {
                         window.location.href = '/home';
                     } else if (data.status == 'failure') {
-                        alert(data.status);
+                        alert(data.info);
                     }
                 } else {
                     alert('获取数据失败，请重试!');
                 }
             }, 'json');
         }
+//        else if (action == 'findpwd') {
+//            $("#sign").action = '/sign/findPass';
+//            $("#sign").submit();
+//        }
     });
 
     $("#signup").click(function() {
-        var repwdbut = $("div.repwd").css('display');
+        var repwdbut = $("#repwd").css('display');
         if (repwdbut == 'none') {
-            $("div.repwd").css('display', 'block');
-            $("a.getpwd-link").css('display', 'none');
+            $("#sign").data("action", "signup");
+            $("#repwd").fadeIn();
+            $("a.getpwd-link").fadeOut();
             $("#login").text('注  册');
-            $("#signup").text('登录');
+            $("#signup").text('登  录');
         } else {
-            $("div.repwd").css('display', 'none');
-            $("a.getpwd-link").css('display', 'inline-block');
+            $("#sign").data("action", "login");
+            $("#repwd").fadeOut();
+            $("a.getpwd-link").fadeIn();
             $("#login").text('登  录');
-            $("#signup").text('注册');
+            $("#signup").text('注  册');
         }
+    });
+    $("#lostpass").click(function() {
+//        var pwdbut = $("#password").css('display');
+//        if (pwdbut == 'none') {
+//            $("#sign").data("action", "login");
+//            $("#password").fadeIn();
+//            $("#login").text('登  录');
+//            $("#lostpass").text('找回密码？');
+//        } else {
+//            $("#sign").data("action", "findpwd");
+//            $("#password").fadeOut();
+//            $("#login").text('确  定');
+//            $("#lostpass").text('登  录');
+//        }
+        window.location.href = '/sign/findPassPage';
     });
 
     //用户注册

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>密码找回 | 云袖便签</title>
+    <link href="/css/reset.css" rel="stylesheet"/>
+    <link href="/css/index.css" rel="stylesheet"/>
+    <style type="text/css">
+        .p_notice {
+            font-size: 14px;
+            margin: 0px 18px 20px;
+        }
+
+        /*.send_ok {*/
+            /*width: 520px;*/
+            /*height: 360px;*/
+            /*position: absolute;*/
+            /*left: 45%;*/
+            /*top: 15%;*/
+            /*margin-left: -210px;*/
+            /*opacity: 1;*/
+            /*visibility: visible;*/
+            /*background-color: #ffffff;*/
+            /*-webkit-border-radius: 6px;*/
+            /*-moz-border-radius: 6px;*/
+
+            /*border-radius: 6px;*/
+            /*border: 20px outset;*/
+            /*-webkit-border-image:url(/images/email_border.png) 30 30 round; *//* Safari 5 */
+            /*-o-border-image:url(/images/email_border.png) 30 30 round; *//* Opera */
+            /*border-image:url(/images/email_border.png) 30 30 round;*/
+        /*}*/
+
+        div.send_ok {
+            display: none;
+            text-decoration: none;
+            color: #fff9f8;
+            width: 12em;
+            cursor: default;
+            padding: 1em; /* Firefox */
+            -moz-box-shadow: 5px 5px 7px rgba(33, 33, 33, 1); /* Safari+Chrome */
+            -webkit-box-shadow: 5px 5px 7px rgba(33, 33, 33, .7); /* Opera */
+            box-shadow: 5px 5px 7px rgba(33, 33, 33, .7);
+
+            -moz-transition: -moz-transform .15s linear;
+            -o-transition: -o-transform .15s linear;
+            -webkit-transition: -webkit-transform .15s linear;
+
+            -o-transform: rotate(4deg);
+            -webkit-transform: rotate(4deg);
+            -moz-transform: rotate(4deg);
+            position: relative;
+            top: 50px;
+            left: 85%;
+            background: #ff95c4;
+        }
+
+        div.send_ok p {
+            font-size: 110%;
+        }
+
+        div.send_ok:hover, div.send_ok:focus {
+            -moz-box-shadow: 10px 10px 7px rgba(0, 0, 0, .7);
+            -webkit-box-shadow: 10px 10px 7px rgba(0, 0, 0, .7);
+            box-shadow: 10px 10px 7px rgba(0, 0, 0, .7);
+            -webkit-transform: scale(1.25);
+            -moz-transform: scale(1.25);
+            -o-transform: scale(1.25);
+            position: relative;
+            z-index: 5;
+        }
+        div.send_ok p a {
+            color: #3035df;
+        }
+
+        .email_show {
+            display: none;
+            margin-top: 200px;
+        }
+    </style>
+    <script type="text/javascript" src="/lib/jquery-2.0.0.min.js"></script>
+    <script type="text/javascript" src="/lib/verifier.js"></script>
+</head>
+<body>
+<div id="send_form" class="login-form">
+    <form id="sign" action="/sign/findPass" method="post">
+        <div class="control-group">
+            <input id="email" name="email" type="text" class="login-field" placeholder="邮箱" />
+            <label class="login-field-icon fui-user" for="email"></label>
+        </div>
+        <p id="notice" class="p_notice">请输入您注册帐户时使用的电子邮箱</p>
+        <a id="login_but" class="btn btn-primary btn-large btn-block" href="javascript:void(0)">提  交</a>
+    </form>
+</div>
+
+<a id="email_img" class="email_show" href=""><img src="/images/email.png" alt="查看邮件"/></a>
+
+<div id="send_email_ok" class="send_ok">
+    <p>系统已经发送了一封邮件给您的邮箱，请点击邮箱中的链接来重新设置密码!</p>
+    <p>如果没有收到邮件请检查邮件是否被误认为垃圾邮件，或者点击<a href="/sign/findPassPage">重试</a>来重新发送邮件。</p>
+    <p>如果点击【登录邮箱】按钮不能跳转到邮箱，请自行登录您的邮箱点击链接。</p>
+</div>
+</body>
+<script type="text/javascript">
+    $(function() {
+        var notice = $("#notice").text();
+        var vr = new Verifier();
+        $("#email").focus(function() {
+            $("#notice").text(notice);
+            $("#notice").css({"color": "#404040", "background-color": "#EDEFF1"});
+        });
+        $("#login_but").click(function() {
+            var email = $("#email").val();
+            if (!email) {
+                $("#notice").text('邮箱不能为空!');
+                $("#notice").css({"color": "#B94A48", "background-color": "#F2DEDE"});
+            } else if (!vr.isEmail(email)) {
+                $("#notice").text('邮箱格式不正确!');
+                $("#notice").css({"color": "#B94A48", "background-color": "#F2DEDE"});
+            } else {
+                $.getJSON('/sign/findPass', { email : email}, function(json) {
+                    console.log(json);
+                    if (json) {
+                        if (json.status == 'success') {
+                            $("#send_email_ok").slideDown();
+                            $("#email_img").slideDown();
+                            $("#send_form").slideUp();
+                            $("#email_img").href(json.site);
+                        } else if (json.status == 'failure') {
+                            $("#notice").text(json.info);
+                            $("#notice").css({"color": "#B94A48", "background-color": "#F2DEDE"});
+                        }
+                    } else {
+                        $("#notice").text('获取数据失败，请重试!');
+                        $("#notice").css({"color": "#B94A48", "background-color": "#F2DEDE"});
+                    }
+                });
+            }
+        });
+    });
+
+</script>
+</html>

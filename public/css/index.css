@@ -15,7 +15,7 @@
 }
 
 body {
-    background: url("/images/bg.png") no-repeat;
+    background: url(/images/bg.png) no-repeat;
     background-color: #ffffff;
     overflow: hidden;
 }
@@ -44,7 +44,7 @@ body, textarea, select, input, button {
 
 .box {
     width: 420px;
-    margin: 0 auto 55px;
+    margin: 0 auto 60px 37%;
 }
 
 .slogan {
@@ -65,11 +65,50 @@ body, textarea, select, input, button {
     visibility: visible;
 }
 
+/****** logo ******/
+
+#cloud {
+    width: 220px;
+    height: 80px;
+    background: #fff;
+    background: linear-gradient(top, #fff 5%, #d6f0fd 100%);
+    background: -webkit-linear-gradient(top, #fff 5%, #d6f0fd 100%);
+    background: -moz-linear-gradient(top, #fff 5%, #d6f0fd 100%);
+    background: -ms-linear-gradient(top, #fff 5%, #d6f0fd 100%);
+    background: -o-linear-gradient(top, #fff 5%, #d6f0fd 100%);
+    border-radius: 100px;
+    position: relative;
+    margin: 80px auto 20px;
+}
+
+#cloud:after, #cloud:before {
+    content: '';
+    position: absolute;
+    background: #fff;
+    z-index: -1;
+}
+#cloud:before {
+    width: 100px;
+    height: 100px;
+    top: -50px;
+    right: 30px;
+    border-radius: 200px;
+}
+#cloud:after {
+    width: 80px;
+    height: 80px;
+    top: -30px; left: 30px;
+    border-radius: 100px;
+}
+
+
+
+
 
 /****** form style ******/
 .login-form {
     position: absolute;
-    left: 50%;
+    left: 49%;
     top: 40%;
     width: 420px;
     margin-left: -210px;
@@ -166,17 +205,4 @@ body, textarea, select, input, button {
 
 
 
-li {
-    border-bottom:thick dotted #ff0000;
-    margin-top: 10px;
-}
-
-
-
-/***** reset ******/
-ul {
-    list-style-type: none
-}
-ul li {list-style: none; list-style-type: none}
-ol li {list-style: none;}
 

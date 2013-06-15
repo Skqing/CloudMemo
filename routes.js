@@ -24,6 +24,8 @@ module.exports = function (app) {
     app.post('/sign/login', sign.login);
     app.post('/sign/signup', sign.signup);
     app.get('/sign/logout', sign.logout);
+    app.get('/sign/findPassPage', sign.showFindPass);
+    app.get('/sign/findPass', sign.findPass);
 
 //    app.get('/signup/resetpwd', sign.resetpwd);
 //    app.post('/signup/resetpwd', sign.resetpwd);
